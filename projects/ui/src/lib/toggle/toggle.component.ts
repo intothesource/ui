@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, ViewEncapsulation, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { generate } from 'shortid';
+import { noop } from 'rxjs';
 
 @Component({
   selector: 'its-toggle',
@@ -14,68 +16,50 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     }
   ]
 })
-export class ToggleComponent implements OnInit, ControlValueAccessor {
+export class ToggleComponent
+  implements OnInit, ControlValueAccessor {
 
-  @ViewChild('input', null) input: ElementRef;
-  @ViewChild('label', null) label: ElementRef;
+  onChange: any = noop;
+  onTouch: any = noop;
 
-  @Input() toggleName: string;
-
-  constructor() { }
-
-  onChange: any = () => { }
-
-  onTouch: any = () => { }
-
-  val = false;
-
+  $name: string;
   @Input()
-  set value(val: boolean) {  // this value is updated by programmatic changes if( val !== undefined && this.val !== val){
-    console.log('set called', val);
-    this.val = val
-    this.onChange(val)
-    this.onTouch(val)
-    this.setState(val);
+  set name(val: string) { this.$name = val; }
+  get name() { return this.$name; }
+
+  $id: string;
+  @Input()
+  set id(val: string) { this.$id = val; }
+  get id() { return this.$id; }
+
+  $value = false;
+  @Input()
+  set value(val: boolean) {
+    if (val !== undefined && this.$value !== val) {
+      this.$value = val;
+      this.onChange(val);
+      this.onTouch(val);
+    }
+  }
+  get value(): boolean {
+    return this.$value;
+  }
+
+  writeValue(value: any) {
+    this.value = value;
+  }
+
+  registerOnChange(fn: any) {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any) {
+    this.onTouch = fn;
   }
 
   ngOnInit() {
-    this.setRandomName(this.toggleName);
-    this.linkElements(this.toggleName);
-  }
-
-  // this method sets the value programmatically
-  writeValue(value: any) {
-    this.value = value
-  }
-
-  // upon UI element value changes, this method gets triggered
-  registerOnChange(fn: any) {
-    this.onChange = fn
-  }
-
-  // upon touching the element, this method gets triggered
-  registerOnTouched(fn: any) {
-    this.onTouch = fn
-  }
-
-  setRandomName(name) {
-    if (!name) {
-      this.toggleName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    }
-  }
-
-  linkElements(name) {
-    this.input.nativeElement.setAttribute('name', name);
-    this.input.nativeElement.setAttribute('id', name);
-    this.label.nativeElement.setAttribute('for', name);
-  }
-
-  setState(bool) {
-    console.log('settting state');
-    if (typeof this.val === "boolean") {
-      console.log('set state', this.val);
-      this.input.nativeElement.checked = bool;
-    }
+    if (!this.$id) { this.$id = generate(); }
+    if (!this.$name) { this.$name = generate(); }
   }
 
 }

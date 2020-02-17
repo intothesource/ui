@@ -83,8 +83,23 @@
     </div>
     <div class="container">
       <its-button>Dit is een test</its-button>
-      <its-toggle (value)="true"></its-toggle>
-      <label><input [(ngModel)]="box" type="checkbox"/>Dit is een checkbox</label>
+      <div>
+        <label>
+          <its-toggle [(ngModel)]="box"></its-toggle>Dit is een toggle mbv [(ngModel)]="box"
+        </label>
+      </div>
+      <hr>
+      <div>
+        <label>
+          <its-toggle [value]="box"></its-toggle>readonly mbv [value]="box"
+        </label>
+      </div>
+      <hr>
+      <div>
+        <label><input [(ngModel)]="box"
+            type="checkbox" />Dit is een checkbox</label>
+      </div>
+      <hr>
       <pre><code>Box: {{ box }}</code></pre>
     </div>
   </body>

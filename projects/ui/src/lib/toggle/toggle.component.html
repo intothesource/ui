@@ -1,2 +1,8 @@
-<input [(ngModel)]="value" type="checkbox" data-its-toggle-input #input>
-<label data-its-toggle-label #label for="input"></label>
+<input data-its-toggle-input
+  type="checkbox"
+  [(ngModel)]="value"
+  [attr.checked]="value"
+  [attr.name]="name"
+  [attr.id]="id">
+<label data-its-toggle-label
+  [attr.for]="id"></label>
