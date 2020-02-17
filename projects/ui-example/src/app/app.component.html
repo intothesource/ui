@@ -83,7 +83,9 @@
     </div>
     <div class="container">
       <its-button>Dit is een test</its-button>
-      <its-toggle [toggleState]="true"></its-toggle>
+      <its-toggle (value)="true"></its-toggle>
+      <label><input [(ngModel)]="box" type="checkbox"/>Dit is een checkbox</label>
+      <pre><code>Box: {{ box }}</code></pre>
     </div>
   </body>
 </html>

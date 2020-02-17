@@ -1,24 +1,61 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, ViewEncapsulation, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'its-toggle',
   templateUrl: './toggle.component.html',
-  styleUrls: ['./toggle.component.css']
+  styleUrls: ['./toggle.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ToggleComponent),
+      multi: true
+    }
+  ]
 })
-export class ToggleComponent implements OnInit {
+export class ToggleComponent implements OnInit, ControlValueAccessor {
 
   @ViewChild('input', null) input: ElementRef;
   @ViewChild('label', null) label: ElementRef;
 
   @Input() toggleName: string;
-  @Input() toggleState: string;
 
   constructor() { }
+
+  onChange: any = () => { }
+
+  onTouch: any = () => { }
+
+  val = false;
+
+  @Input()
+  set value(val: boolean) {  // this value is updated by programmatic changes if( val !== undefined && this.val !== val){
+    console.log('set called', val);
+    this.val = val
+    this.onChange(val)
+    this.onTouch(val)
+    this.setState(val);
+  }
 
   ngOnInit() {
     this.setRandomName(this.toggleName);
     this.linkElements(this.toggleName);
-    this.setState(this.toggleState);
+  }
+
+  // this method sets the value programmatically
+  writeValue(value: any) {
+    this.value = value
+  }
+
+  // upon UI element value changes, this method gets triggered
+  registerOnChange(fn: any) {
+    this.onChange = fn
+  }
+
+  // upon touching the element, this method gets triggered
+  registerOnTouched(fn: any) {
+    this.onTouch = fn
   }
 
   setRandomName(name) {
@@ -34,7 +71,9 @@ export class ToggleComponent implements OnInit {
   }
 
   setState(bool) {
-    if (typeof this.toggleState === "boolean") {
+    console.log('settting state');
+    if (typeof this.val === "boolean") {
+      console.log('set state', this.val);
       this.input.nativeElement.checked = bool;
     }
   }

@@ -10,7 +10,7 @@ import { UiModule } from 'ui';
   ],
   imports: [
     BrowserModule,
-    UiModule
+    UiModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
