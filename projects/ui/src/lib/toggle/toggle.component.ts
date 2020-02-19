@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, forwardRef, HostBinding } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { generate } from 'shortid';
 import { noop } from 'rxjs';
@@ -7,7 +7,7 @@ import { noop } from 'rxjs';
   selector: 'its-toggle',
   templateUrl: './toggle.component.html',
   styleUrls: ['./toggle.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
