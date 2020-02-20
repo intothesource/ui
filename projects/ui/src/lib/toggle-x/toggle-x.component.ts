@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, forwardRef, HostBinding, HostListener } from '@angular/core';
+import { Component, Input, ViewEncapsulation, forwardRef, HostBinding, HostListener, ElementRef, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { noop } from 'rxjs';
 
@@ -16,7 +16,11 @@ import { noop } from 'rxjs';
   ]
 })
 export class ToggleXComponent
-  implements ControlValueAccessor {
+  implements ControlValueAccessor, OnInit {
+
+  constructor(
+    public elementRef: ElementRef<HTMLElement>,
+  ) { }
 
   onChange: any = noop;
   onTouch: any = noop;
@@ -107,6 +111,57 @@ export class ToggleXComponent
   // this component as part of the ControlValueAccessor logic.
   registerOnTouched(fn: any) {
     this.onTouch = fn;
+  }
+
+  ngOnInit() {
+
+    if (
+      this.elementRef.nativeElement
+    ) {
+
+      //
+      // If the parent element is a `<label>`, then we have to propagate clicks
+      // to the control element. Also pull focus to the control to emulate
+      // default behaviour of the browser.
+      //
+      // Another way to deal with this, is by creating a `<its-form-label>`
+      // component that does this in a more "Angular way".
+      //
+
+      if (
+        this.elementRef.nativeElement.parentElement &&
+        this.elementRef.nativeElement.parentElement.nodeName === 'LABEL'
+      ) {
+        this.elementRef.nativeElement.parentElement.addEventListener('click', ($event) => {
+          $event.preventDefault();
+          this.elementRef.nativeElement.focus();
+          this.toggle();
+        });
+      }
+
+      //
+      // If this element has an `[id]` attribute then we'll go look for a
+      // sibling label with the corresponding `[for]` attribute and emulate
+      // the native behavior of the browser here as well.
+      //
+      // As with the wrapped `<label>` above, this can also be done in a more
+      // "Angular way" by using a custom parent component/directive that links
+      // their host elements and behaviors together.
+      //
+
+      if (
+        this.elementRef.nativeElement.id &&
+        this.elementRef.nativeElement.parentElement
+      ) {
+        const labelElement = this.elementRef.nativeElement.parentElement.querySelector(`[for="${this.elementRef.nativeElement.id}"]`);
+        if (labelElement == null) { return; }
+        labelElement.addEventListener('click', ($event) => {
+          $event.preventDefault();
+          this.elementRef.nativeElement.focus();
+          this.toggle();
+        });
+      }
+    }
   }
 
 }

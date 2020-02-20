@@ -86,9 +86,24 @@
 
     <div class="container">
       <div>
+        <!--
+          Wrapping the input inside a label "just works", because the native
+          input is one of the label's children.
+        -->
         <label>
-          <its-toggle [(ngModel)]="box"></its-toggle> This is a toggle
+          <its-toggle [(ngModel)]="box"></its-toggle> This is a toggle, wrapped in a label
         </label>
+      </div>
+      <hr>
+      <div>
+        <!--
+          Using id/for attributes to a label that sits beside the toggle also
+          works, as long as we make sure that the [id] attribute can be read
+          by the `Input()` decorator of the toggle component.
+        -->
+        <its-toggle [(ngModel)]="box"
+          [id]="'box1-example2'"></its-toggle>
+        <label for="box1-example2">This is a toggle, with id/for label</label>
       </div>
       <hr>
       <div>
@@ -104,8 +119,14 @@
     <div class="container">
       <div>
         <label>
-          <its-toggle-x [(ngModel)]="box2"></its-toggle-x> This is a custom toggle
+          <its-toggle-x [(ngModel)]="box2"></its-toggle-x> This is a custom toggle, wrapped in a label
         </label>
+      </div>
+      <hr>
+      <div>
+        <its-toggle-x [(ngModel)]="box2"
+          id="box2-example2"></its-toggle-x>
+        <label for="box2-example2">This is a custom toggle, with id/for label</label>
       </div>
       <hr>
       <div>
