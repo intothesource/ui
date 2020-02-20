@@ -50,6 +50,9 @@ export class ToggleXComponent
       this.onTouch(val);
     }
   }
+  get value() {
+    return this.$value;
+  }
 
   // Toggle just flips the value from true to false and vice versa
   toggle() {
@@ -79,7 +82,9 @@ export class ToggleXComponent
   // Be sure to prevent default, otherwise spacebar will start scrolling
   @HostListener('window:keydown', ['$event'])
   onKeydown($event: KeyboardEvent) {
-    if (!this.$focus) { return; }
+    if (!this.$focus) {
+      return;
+    }
     if ($event.keyCode === 32) {
       $event.preventDefault();
       return this.toggle();

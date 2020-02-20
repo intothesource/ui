@@ -22,7 +22,8 @@ export class ToggleComponent
   onChange: any = noop;
   onTouch: any = noop;
 
-  @HostBinding('class') classes = 'its-toggle';
+  @HostBinding('class')
+  classes = 'its-toggle';
 
   private $name: string;
   @Input()
