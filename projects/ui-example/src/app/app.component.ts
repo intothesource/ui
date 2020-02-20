@@ -8,4 +8,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'ui-example';
   box = false;
+  box2 = false;
+  onBoxChanged(val, $event) {
+    console.log(val, $event);
+  }
 }

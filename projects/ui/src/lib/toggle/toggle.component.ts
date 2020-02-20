@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, forwardRef, HostBinding } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { generate } from 'shortid';
 import { noop } from 'rxjs';
@@ -22,17 +22,19 @@ export class ToggleComponent
   onChange: any = noop;
   onTouch: any = noop;
 
-  $name: string;
+  @HostBinding('class') classes = 'its-toggle';
+
+  private $name: string;
   @Input()
   set name(val: string) { this.$name = val; }
   get name() { return this.$name; }
 
-  $id: string;
+  private $id: string;
   @Input()
   set id(val: string) { this.$id = val; }
   get id() { return this.$id; }
 
-  $value = false;
+  private $value = false;
   @Input()
   set value(val: boolean) {
     if (val !== undefined && this.$value !== val) {

@@ -1,8 +1,11 @@
-<input data-its-toggle-input
-  type="checkbox"
+<input type="checkbox"
+  class="visually-hidden"
   [(ngModel)]="value"
-  [attr.checked]="value"
-  [attr.name]="name"
-  [attr.id]="id">
-<label data-its-toggle-label
-  [attr.for]="id"></label>
+  [checked]="value"
+  [name]="name"
+  [id]="id">
+<label class="its-toggle__control"
+  [for]="id">
+  <div class="its-toggle__control__track"></div>
+  <div class="its-toggle__control__button"></div>
+</label>

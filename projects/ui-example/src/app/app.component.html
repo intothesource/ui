@@ -85,22 +85,32 @@
       <its-button>Dit is een test</its-button>
       <div>
         <label>
-          <its-toggle [(ngModel)]="box"></its-toggle>Dit is een toggle mbv [(ngModel)]="box"
-        </label>
-      </div>
-      <hr>
-      <div>
-        <label>
-          <its-toggle [value]="box"></its-toggle>readonly mbv [value]="box"
+          <its-toggle [(ngModel)]="box"></its-toggle> This is a toggle
         </label>
       </div>
       <hr>
       <div>
         <label><input [(ngModel)]="box"
-            type="checkbox" />Dit is een checkbox</label>
+            type="checkbox" />This is a plain checkbox</label>
       </div>
       <hr>
       <pre><code>Box: {{ box }}</code></pre>
+    </div>
+
+    <div class="container">
+      <its-button>Dit is een test</its-button>
+      <div>
+        <label>
+          <its-toggle-x [(ngModel)]="box2"></its-toggle-x> This is a custom toggle
+        </label>
+      </div>
+      <hr>
+      <div>
+        <label><input [(ngModel)]="box2"
+            type="checkbox" />Just another plain checkbox</label>
+      </div>
+      <hr>
+      <pre><code>Box2: {{ box2 }}</code></pre>
     </div>
   </body>
 </html>
