@@ -69,6 +69,16 @@
   transform: translate(80%, -50%);
 }
 
-.its-toggle > input:focus + .its-toggle__control {
-  outline: 2px solid red;
+.its-toggle > input:focus + .its-toggle__control,
+.its-toggle > input:hover + .its-toggle__control {
+  border-radius: 50%;
+  background: #eaecee;
+  border: 2px solid #eaecee;
+}
+
+.its-toggle > input:focus:checked + .its-toggle__control,
+.its-toggle > input:hover:checked + .its-toggle__control {
+  border-radius: 50%;
+  background: #d1ffed;
+  border: 2px solid #d1ffed;
 }
