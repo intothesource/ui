@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, HostBinding } from '@angular/core';
 
 @Component({
-  selector: 'its-button',
+  // tslint:disable-next-line:component-selector
+  selector: 'button[its-button]',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.css']
+  styleUrls: ['./button.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
-export class ButtonComponent implements OnInit {
+export class ButtonComponent
+  implements OnInit {
+
+  @HostBinding('class')
+  classes = 'its-button';
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }
