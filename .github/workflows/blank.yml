@@ -24,6 +24,12 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '10.x'
+      - uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - run: npm install
       # - run: npm test
@@ -31,5 +37,17 @@ jobs:
       - name: Build storybook
         run: npm run build-storybook || true
 
-      - name: Deploy GH Pages
-        run: npm run deploy:gh-pages
+      # - name: Deploy GH Pages
+      #   run: npm run deploy:gh-pages
+
+      - name: Install SSH Client 🔑
+        uses: webfactory/ssh-agent@v0.2.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+
+      - name: Build and Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          SSH: true
+          BRANCH: gh-pages
+          FOLDER: .storybook-out
