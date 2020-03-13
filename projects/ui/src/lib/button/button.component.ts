@@ -1,20 +1,41 @@
-import { Component, OnInit, ViewEncapsulation, HostBinding } from '@angular/core';
+import { Component, ViewEncapsulation, HostBinding, Input } from '@angular/core';
+
+/**
+ * List of variants supported for this button
+ */
+export const SUPPORTED_COLORS = [
+  'primary',
+  'secondary',
+];
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'button[its-button]',
+  selector: 'button[its-button], a[its-button]',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ButtonComponent
-  implements OnInit {
+export class ButtonComponent {
+
+  @Input()
+  color: string;
+
+  @Input()
+  outline: boolean;
 
   @HostBinding('class')
-  classes = 'its-button';
+  get classes() {
+    const classes = ['its-button'];
 
-  constructor() { }
+    if (SUPPORTED_COLORS.includes(this.color)) {
+      classes.push(`its-button--color-${this.color}`);
+    }
 
-  ngOnInit() { }
+    if (this.outline === true) {
+      classes.push(`its-button--outline`);
+    }
+
+    return classes;
+  };
 
 }

@@ -6,4 +6,22 @@
   margin: 0;
   border: none;
   outline: 0;
+  background: red;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.its-button.its-button--outline {
+  background: transparent;
+  border: 2px solid transparent;
+}
+
+.its-button--color-primary {
+  background: var(--color-primary, blue);
+  color: white;
+}
+
+.its-button--color-primary.its-button--outline {
+  border-color: var(--color-primary, blue);
+  color: var(--color-primary, blue);
 }

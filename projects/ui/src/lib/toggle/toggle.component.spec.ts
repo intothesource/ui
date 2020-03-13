@@ -1,64 +1,183 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { ToggleComponent } from './toggle.component';
+import { Component } from '@angular/core';
 
 describe('ToggleComponent', () => {
-  let component: ToggleComponent;
-  let fixture: ComponentFixture<ToggleComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ToggleComponent],
-      imports: [FormsModule]
-    }).compileComponents();
-  }));
+  describe('basic operations', () => {
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ToggleComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        declarations: [ToggleComponent],
+        imports: [FormsModule]
+      })
+
+      TestBed.compileComponents();
+    }));
+
+    it('should create', () => {
+      const fixture = TestBed.createComponent(ToggleComponent);
+      const toggleDebugElement = fixture.debugElement;
+
+      fixture.detectChanges();
+      expect(toggleDebugElement).toBeTruthy();
+    });
+
+    it('should add `its-toggle` class to `<its-toggle>` element', () => {
+      const fixture = TestBed.createComponent(ToggleComponent);
+      const toggleDebugElement = fixture.debugElement;
+
+      fixture.detectChanges();
+      expect(toggleDebugElement.nativeElement.classList.contains('its-toggle')).toBe(true);
+    });
+
+    it('should create a native input', () => {
+      const fixture = TestBed.createComponent(ToggleComponent);
+      const toggleDebugElement = fixture.debugElement;
+      const inputDebugElement = toggleDebugElement.query(By.css('input'));
+
+      fixture.detectChanges();
+      expect(inputDebugElement).toBeTruthy();
+    });
+
+    it('should create a native label', () => {
+      const fixture = TestBed.createComponent(ToggleComponent);
+      const toggleDebugElement = fixture.debugElement;
+      const inputLabelElement = toggleDebugElement.query(By.css('label'));
+
+      fixture.detectChanges();
+      expect(inputLabelElement).toBeTruthy();
+    });
+
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('generated attributes', () => {
+
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        declarations: [Toggle, ToggleComponent],
+        imports: [FormsModule]
+      })
+
+      TestBed.compileComponents();
+    }));
+
+    it('should create an id if one is not provided', () => {
+      const fixture = TestBed.createComponent(Toggle);
+      const toggleDebugElement = fixture.debugElement.query(By.directive(ToggleComponent));
+      const inputDebugElement = toggleDebugElement.query(By.css('input'));
+
+      fixture.detectChanges();
+      expect(toggleDebugElement.componentInstance.id).toBeTruthy();
+      expect(inputDebugElement.nativeElement.id).toBeTruthy();
+      expect(inputDebugElement.nativeElement.id).toBe(toggleDebugElement.componentInstance.id);
+    });
+
+    it('label [for] should match generated [id]', () => {
+      const fixture = TestBed.createComponent(Toggle);
+      const toggleDebugElement = fixture.debugElement.query(By.directive(ToggleComponent));
+      const inputDebugElement = toggleDebugElement.query(By.css('input'));
+      const labelDebugElement = toggleDebugElement.query(By.css('label'));
+      fixture.detectChanges();
+
+      expect(toggleDebugElement.componentInstance.id).toBeTruthy();
+      expect(inputDebugElement.nativeElement.id).toBeTruthy();
+      expect(labelDebugElement.nativeElement.htmlFor).toBeTruthy();
+      expect(inputDebugElement.nativeElement.id).toBe(labelDebugElement.nativeElement.htmlFor);
+    });
+
   });
 
-  it('should contain an input', () => {
-    const input = fixture.debugElement.query(By.css('input'));
-    expect(input).toBeTruthy();
+  describe('With ID', () => {
+
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        declarations: [ToggleWithId, ToggleComponent],
+        imports: [FormsModule]
+      })
+
+      TestBed.compileComponents();
+    }));
+
+    it('should use the id that was provided', () => {
+      const fixture = TestBed.createComponent(ToggleWithId);
+      const toggleDebugElement = fixture.debugElement.query(By.directive(ToggleComponent));
+      const inputDebugElement = toggleDebugElement.query(By.css('input'));
+      fixture.detectChanges();
+
+      expect(toggleDebugElement.componentInstance.id).toBe('abc-123');
+      expect(inputDebugElement.nativeElement.id).toBe('abc-123');
+    });
+
+    it('should use the [for] that was provided as [id]', () => {
+      const fixture = TestBed.createComponent(ToggleWithId);
+      const toggleDebugElement = fixture.debugElement.query(By.directive(ToggleComponent));
+      const inputDebugElement = toggleDebugElement.query(By.css('input'));
+      const labelDebugElement = toggleDebugElement.query(By.css('label'));
+      fixture.detectChanges();
+
+      expect(toggleDebugElement.componentInstance.id).toBe('abc-123');
+      expect(inputDebugElement.nativeElement.id).toBe('abc-123');
+      expect(labelDebugElement.nativeElement.htmlFor).toBe('abc-123');
+      expect(labelDebugElement.nativeElement.htmlFor).toBe(inputDebugElement.nativeElement.id);
+    });
+
   });
 
-  it('should contain a label', () => {
-    const label = fixture.debugElement.query(By.css('label'));
-    expect(label).toBeTruthy();
-  });
+  describe('With ngModel', () => {
 
-  it('should generate an id if not provided', () => {
-    component.id = 'foo';
-    fixture.detectChanges();
-    expect(fixture.componentInstance.id).toBe('foo');
-  });
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        declarations: [ToggleWithNgModel, ToggleComponent],
+        imports: [FormsModule]
+      })
 
-  it('the input and the label should have the same id/for attributes when not provided', () => {
-    const input = fixture.debugElement.query(By.css('input'));
-    const { id: $id } = input.attributes;
-    const label = fixture.debugElement.query(By.css('label'));
-    const { for: $for } = label.attributes;
-    expect($id).toBe($for);
-  });
+      TestBed.compileComponents();
+    }));
 
-  it('the input and the label should have the same id/for attributes when provided', () => {
-    component.id = 'bar';
-    fixture.detectChanges();
-    const input = fixture.debugElement.query(By.css('input'));
-    const { id: $id } = input.attributes;
-    const label = fixture.debugElement.query(By.css('label'));
-    const { for: $for } = label.attributes;
-    expect($id).toBe('bar');
-    expect($for).toBe('bar');
-    expect($id).toBe($for);
-  });
+    fit('should use the value that was provided', async(() => {
+      const fixture = TestBed.createComponent(ToggleWithNgModel);
+      fixture.detectChanges();
 
+      const toggleDebugElement = fixture.debugElement.query(By.directive(ToggleComponent));
+      const component = toggleDebugElement.componentInstance;
+      const inputDebugElement = toggleDebugElement.query(By.css('input'));
+
+      fixture.whenStable().then(() => {
+        fixture.detectChanges();
+
+        expect(component.value).toBe(true);
+        expect(inputDebugElement.nativeElement.value).toBe('on');
+        expect(inputDebugElement.nativeElement.checked).toBe(true);
+      });
+
+    }));
+
+  });
 });
+
+@Component({
+  template: `<its-toggle></its-toggle>`
+})
+class Toggle { }
+
+@Component({
+  template: `<its-toggle [id]="id"></its-toggle>`
+})
+class ToggleWithId {
+  id = 'abc-123';
+}
+
+@Component({
+  template: `
+    <p>Toggle that uses [[(ngModel)]="model"]</p>
+    <its-toggle [(ngModel)]="model"></its-toggle>
+    <pre><code>model: {{ model | json }}</code></pre>
+  `
+})
+class ToggleWithNgModel {
+  model = true;
+}

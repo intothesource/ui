@@ -1,50 +1,146 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 
 import { ButtonComponent } from './button.component';
-import { ComponentFactory, Injector, ComponentFactoryResolver } from '@angular/core';
-import { createComponentWithContents } from '../../util/create-component-with-contents';
+import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-describe('ButtonComponent', () => {
-  let component: ButtonComponent;
-  let fixture: ComponentFixture<ButtonComponent>;
-  let factory: ComponentFactory<ButtonComponent>;
+describe('Button', () => {
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ButtonComponent]
-    }).compileComponents();
-  }));
+  describe('On `<button>` element', () => {
 
-  beforeEach(async () => {
-    fixture = TestBed.createComponent(ButtonComponent);
-    component = fixture.componentInstance;
-    const resolver = TestBed.get(ComponentFactoryResolver, null) as ComponentFactoryResolver;
-    factory = resolver.resolveComponentFactory(ButtonComponent);
-    fixture.detectChanges();
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        declarations: [Button, ButtonComponent],
+      });
+
+      TestBed.compileComponents();
+    }));
+
+    it('should create on button', () => {
+      const fixture = TestBed.createComponent(Button);
+      const buttonDebugElement = fixture.debugElement.query(By.directive(ButtonComponent));
+
+      fixture.detectChanges();
+      expect(buttonDebugElement).toBeTruthy();
+    });
+
+    it('should add `its-button` class to `<button>` element', () => {
+      const fixture = TestBed.createComponent(Button);
+      const buttonDebugElement = fixture.debugElement.query(By.directive(ButtonComponent));
+
+      fixture.detectChanges();
+      expect(buttonDebugElement.nativeElement.classList.contains('its-button')).toBe(true);
+    });
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('On `<a>` element', () => {
+
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        declarations: [Anchor, ButtonComponent],
+      });
+
+      TestBed.compileComponents();
+    }));
+
+    it('should create on anchor', () => {
+      const fixture = TestBed.createComponent(Anchor);
+      const aDebugElement = fixture.debugElement.query(By.directive(ButtonComponent));
+
+      fixture.detectChanges();
+      expect(aDebugElement).toBeTruthy();
+    });
+
+    it('should add `its-button` class to `<a>` element', () => {
+      const fixture = TestBed.createComponent(Anchor);
+      const aDebugElement = fixture.debugElement.query(By.directive(ButtonComponent));
+
+      fixture.detectChanges();
+      expect(aDebugElement.nativeElement.classList).toContain('its-button');
+    });
   });
 
-  // it('should transclude the provided nodes into the button', () => {
-  //   const tnode = document.createTextNode('Foo bar');
-  //   const componentRef = factory.create(Injector.NULL, [[tnode]]);
-  //   const button = componentRef.location.nativeElement;
-  //   expect(button.textContent).toBe('Foo bar');
-  // });
+  describe('With variant', () => {
 
-  // it('should transclude the provided nested element nodes into the button', () => {
-  //   const componentRef = createComponentWithContents(factory, '<div>Foo Bar</div>');
-  //   const div = fixture.debugElement.query(By.css('div'))
-  //   expect(div).toBeTruthy();
-  // });
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        declarations: [WithColor, ButtonComponent],
+      });
 
-  // it('should transclude the provided nested text nodes into the button', () => {
-  //   const componentRef = createComponentWithContents(factory, '<div>Foo Bar</div>');
-  //   const button = componentRef.location.nativeElement;
-  //   expect(button.children[0].textContent).toBe('Foo Bar');
-  // });
+      TestBed.compileComponents();
+    }));
+
+    it('should add `its-button--color-primary` class to `[color="primary"]` element', () => {
+      const fixture = TestBed.createComponent(WithColor);
+      const buttonDebugElement = fixture.debugElement.query(By.directive(ButtonComponent));
+
+      fixture.detectChanges();
+      expect(buttonDebugElement.nativeElement.classList).toContain('its-button--color-primary');
+    });
+  });
+
+  describe('With outline', () => {
+
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        declarations: [WithOutline, ButtonComponent],
+      });
+
+      TestBed.compileComponents();
+    }));
+
+    it('should add `its-button--outline` class to `[[outline]="true"]` element', () => {
+      const fixture = TestBed.createComponent(WithOutline);
+      const buttonDebugElement = fixture.debugElement.query(By.directive(ButtonComponent));
+
+      fixture.detectChanges();
+      expect(buttonDebugElement.nativeElement.classList).toContain('its-button--outline');
+    });
+  });
+
+  describe('With outline and color', () => {
+
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        declarations: [WithOutlineAndColor, ButtonComponent],
+      });
+
+      TestBed.compileComponents();
+    }));
+
+    it('should add `its-button--outline` class to `[[outline]="true"]` element', () => {
+      const fixture = TestBed.createComponent(WithOutlineAndColor);
+      const buttonDebugElement = fixture.debugElement.query(By.directive(ButtonComponent));
+
+      fixture.detectChanges();
+      expect(buttonDebugElement.nativeElement.classList).toContain('its-button--outline');
+      expect(buttonDebugElement.nativeElement.classList).toContain('its-button--color-primary');
+    });
+  });
 
 });
+
+@Component({
+  template: `<button its-button>Foo</button>`
+})
+class Button { }
+
+@Component({
+  template: `<a its-button>Foo</a>`
+})
+class Anchor { }
+
+@Component({
+  template: `<button its-button color="primary">Foo</button>`
+})
+class WithColor { }
+
+@Component({
+  template: `<button its-button [outline]="true">Foo</button>`
+})
+class WithOutline { }
+
+@Component({
+  template: `<button its-button color="primary" [outline]="true">Chef</button>`
+})
+class WithOutlineAndColor { }
