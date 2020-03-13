@@ -10,7 +10,7 @@ export const SUPPORTED_COLORS = [
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'button[its-button], a[its-button]',
+  selector: 'button[its-button], a[its-button], its-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.css'],
   encapsulation: ViewEncapsulation.None,
