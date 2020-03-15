@@ -17,11 +17,17 @@ export const SUPPORTED_COLORS = [
 })
 export class ButtonComponent {
 
+  $disabled: boolean;
+
   @Input()
   color: string;
 
   @Input()
   outline: boolean;
+
+  @Input()
+  set disabled(val: boolean) { this.$disabled = val; }
+  get disabled() { return !!this.$disabled; }
 
   @HostBinding('class')
   get classes() {
@@ -35,7 +41,11 @@ export class ButtonComponent {
       classes.push(`its-button--outline`);
     }
 
-    return classes;
+    if (this.disabled === true) {
+      classes.push(`its-button--disabled`);
+    }
+
+    return classes.join(' ');
   };
 
 }

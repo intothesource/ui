@@ -1,21 +1,30 @@
 .its-button {
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  display: block;
+  display: inline-flex;
   margin: 0;
   border: none;
   outline: 0;
-  background: red;
+  background: silver;
   font-family: inherit;
   font-size: inherit;
   text-align: center;
+  line-height: 1.5em;
+  padding: 0.5em 1.5em;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.its-button.its-button--disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
 }
 
 .its-button.its-button--outline {
   background: transparent;
-  border: 2px solid transparent;
+  color: silver;
+  border-color: currentColor;
 }
+
+/* Primary */
 
 .its-button--color-primary {
   background: var(--color-primary, blue);
@@ -23,6 +32,18 @@
 }
 
 .its-button--color-primary.its-button--outline {
-  border-color: var(--color-primary, blue);
   color: var(--color-primary, blue);
+  border-color: currentColor;
+}
+
+/* Secondary */
+
+.its-button--color-secondary {
+  background: var(--color-secondary, hotpink);
+  color: white;
+}
+
+.its-button--color-secondary.its-button--outline {
+  color: var(--color-secondary, hotpink);
+  border-color: currentColor;
 }
