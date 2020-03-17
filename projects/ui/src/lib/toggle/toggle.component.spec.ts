@@ -58,7 +58,7 @@ describe('ToggleComponent', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        declarations: [Toggle, ToggleComponent],
+        declarations: [ToggleTestComponent, ToggleComponent],
         imports: [FormsModule]
       })
 
@@ -66,7 +66,7 @@ describe('ToggleComponent', () => {
     }));
 
     it('should create an id if one is not provided', () => {
-      const fixture = TestBed.createComponent(Toggle);
+      const fixture = TestBed.createComponent(ToggleTestComponent);
       const toggleDebugElement = fixture.debugElement.query(By.directive(ToggleComponent));
       const inputDebugElement = toggleDebugElement.query(By.css('input'));
 
@@ -77,7 +77,7 @@ describe('ToggleComponent', () => {
     });
 
     it('label [for] should match generated [id]', () => {
-      const fixture = TestBed.createComponent(Toggle);
+      const fixture = TestBed.createComponent(ToggleTestComponent);
       const toggleDebugElement = fixture.debugElement.query(By.directive(ToggleComponent));
       const inputDebugElement = toggleDebugElement.query(By.css('input'));
       const labelDebugElement = toggleDebugElement.query(By.css('label'));
@@ -95,7 +95,7 @@ describe('ToggleComponent', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        declarations: [ToggleWithId, ToggleComponent],
+        declarations: [ToggleWithIdTestComponent, ToggleComponent],
         imports: [FormsModule]
       })
 
@@ -103,7 +103,7 @@ describe('ToggleComponent', () => {
     }));
 
     it('should use the id that was provided', () => {
-      const fixture = TestBed.createComponent(ToggleWithId);
+      const fixture = TestBed.createComponent(ToggleWithIdTestComponent);
       const toggleDebugElement = fixture.debugElement.query(By.directive(ToggleComponent));
       const inputDebugElement = toggleDebugElement.query(By.css('input'));
       fixture.detectChanges();
@@ -113,7 +113,7 @@ describe('ToggleComponent', () => {
     });
 
     it('should use the [for] that was provided as [id]', () => {
-      const fixture = TestBed.createComponent(ToggleWithId);
+      const fixture = TestBed.createComponent(ToggleWithIdTestComponent);
       const toggleDebugElement = fixture.debugElement.query(By.directive(ToggleComponent));
       const inputDebugElement = toggleDebugElement.query(By.css('input'));
       const labelDebugElement = toggleDebugElement.query(By.css('label'));
@@ -131,7 +131,7 @@ describe('ToggleComponent', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        declarations: [ToggleWithNgModel, ToggleComponent],
+        declarations: [ToggleWithNgModelTestComponent, ToggleComponent],
         imports: [FormsModule]
       })
 
@@ -139,7 +139,7 @@ describe('ToggleComponent', () => {
     }));
 
     fit('should use the value that was provided', async(() => {
-      const fixture = TestBed.createComponent(ToggleWithNgModel);
+      const fixture = TestBed.createComponent(ToggleWithNgModelTestComponent);
       fixture.detectChanges();
 
       const toggleDebugElement = fixture.debugElement.query(By.directive(ToggleComponent));
@@ -162,12 +162,12 @@ describe('ToggleComponent', () => {
 @Component({
   template: `<its-toggle></its-toggle>`
 })
-class Toggle { }
+class ToggleTestComponent { }
 
 @Component({
   template: `<its-toggle [id]="id"></its-toggle>`
 })
-class ToggleWithId {
+class ToggleWithIdTestComponent {
   id = 'abc-123';
 }
 
@@ -178,6 +178,6 @@ class ToggleWithId {
     <pre><code>model: {{ model | json }}</code></pre>
   `
 })
-class ToggleWithNgModel {
+class ToggleWithNgModelTestComponent {
   model = true;
 }

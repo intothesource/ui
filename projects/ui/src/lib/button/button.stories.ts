@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { withKnobs, select, boolean } from '@storybook/addon-knobs/angular';
+import { withKnobs, select, boolean, text } from '@storybook/addon-knobs/angular';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 
@@ -20,7 +20,7 @@ storiesOf('Button', module)
         [outline]="outline"
         [color]="color"
         (click)="onClick($event)"
-      >hello</its-button>
+      >Inloggen</its-button>
     `,
     props: {
       disabled: boolean(
@@ -50,6 +50,71 @@ storiesOf('Button', module)
   }))
   .add('<a its-button>', () => ({
     template: `
-      <a its-button>hello</a>
+    <a its-button>hello</a>
     `,
+  }))
+  .add('Variants', () => ({
+    template: `
+      <h2>Solid button variants</h2>
+      <table [attr.cellpadding]=cellpadding>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Default</th>
+            <th>Disabled</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Default</th>
+            <td><button its-button>{{ text }}</button></td>
+            <td><button its-button disabled>{{ text }}</button></td>
+          </tr>
+          <tr>
+            <th>Primary</th>
+            <td><button its-button color="primary">{{ text }}</button></td>
+            <td><button its-button color="primary" disabled>{{ text }}</button></td>
+          </tr>
+          <tr>
+            <th>Secondary</th>
+            <td><button its-button color="secondary">{{ text }}</button></td>
+            <td><button its-button color="secondary" disabled>{{ text }}</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br>
+      <br>
+      <h2>Outline button variants</h2>
+      <table [attr.cellpadding]=cellpadding>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Default</th>
+            <th>Disabled</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Default</th>
+            <td><button its-button outline>{{ text }}</button></td>
+            <td><button its-button outline disabled>{{ text }}</button></td>
+          </tr>
+          <tr>
+            <th>Primary</th>
+            <td><button its-button color="primary" outline>{{ text }}</button></td>
+            <td><button its-button color="primary" outline disabled>{{ text }}</button></td>
+          </tr>
+          <tr>
+            <th>Secondary</th>
+            <td><button its-button color="secondary" outline>{{ text }}</button></td>
+            <td><button its-button color="secondary" outline disabled>{{ text }}</button></td>
+          </tr>
+        </tbody>
+      </table>
+    `,
+    props: {
+      cellpadding: 10,
+      text: text('Text', 'Button Text'),
+    }
   }))

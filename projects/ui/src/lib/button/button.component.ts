@@ -9,7 +9,6 @@ export const SUPPORTED_COLORS = [
 ];
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'button[its-button], a[its-button], its-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.css'],
@@ -27,7 +26,7 @@ export class ButtonComponent {
 
   @Input()
   set disabled(val: boolean) { this.$disabled = val; }
-  get disabled() { return !!this.$disabled; }
+  get disabled() { return this.$disabled; }
 
   @HostBinding('class')
   get classes() {
@@ -37,11 +36,11 @@ export class ButtonComponent {
       classes.push(`its-button--color-${this.color}`);
     }
 
-    if (this.outline === true) {
+    if (this.outline != null) {
       classes.push(`its-button--outline`);
     }
 
-    if (this.disabled === true) {
+    if (this.disabled != null) {
       classes.push(`its-button--disabled`);
     }
 
