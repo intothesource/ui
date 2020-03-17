@@ -36,11 +36,11 @@ export class ButtonComponent {
       classes.push(`its-button--color-${this.color}`);
     }
 
-    if (this.outline != null) {
+    if (this.outline != null && this.outline !== false) {
       classes.push(`its-button--outline`);
     }
 
-    if (this.disabled != null) {
+    if (this.disabled != null && this.disabled !== false) {
       classes.push(`its-button--disabled`);
     }
 
