@@ -3,14 +3,14 @@ import { withKnobs, select, boolean, text } from '@storybook/addon-knobs/angular
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 
-import { DropdownComponent } from './dropdown.component';
+import { DropdownModule } from './dropdown.module';
 
 storiesOf('Dropdown', module)
   .addDecorator(withKnobs)
   .addDecorator(withA11y)
   .addDecorator(
     moduleMetadata({
-      declarations: [DropdownComponent],
+      imports: [DropdownModule],
     })
   )
   .add('<its-dropdown>', () => ({
