@@ -3,14 +3,15 @@ import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 
-import { ToggleComponent } from './toggle.component';
+import { FormsModule } from '@angular/forms';
+import { ToggleModule } from './toggle.module';
 
 storiesOf('Toggle', module)
   .addDecorator(withKnobs)
   .addDecorator(withA11y)
   .addDecorator(
     moduleMetadata({
-      declarations: [ToggleComponent],
+      imports: [ToggleModule],
     })
   )
   .add('basic', () => ({

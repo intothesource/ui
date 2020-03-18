@@ -3,5 +3,6 @@
  */
 
 export * from './lib/ui.module';
-export * from './lib/button/button.component';
-export * from './lib/toggle/toggle.component';
+export * from './lib/dropdown/dropdown.module';
+export * from './lib/button/button.module';
+export * from './lib/toggle/toggle.module';

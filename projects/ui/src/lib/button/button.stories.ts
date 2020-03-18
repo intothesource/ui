@@ -3,14 +3,14 @@ import { withKnobs, select, boolean, text } from '@storybook/addon-knobs/angular
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 
-import { ButtonComponent } from './button.component';
+import { ButtonModule } from './button.module';
 
 storiesOf('Button', module)
   .addDecorator(withKnobs)
   .addDecorator(withA11y)
   .addDecorator(
     moduleMetadata({
-      declarations: [ButtonComponent],
+      imports: [ButtonModule],
     })
   )
   .add('<its-button>', () => ({
