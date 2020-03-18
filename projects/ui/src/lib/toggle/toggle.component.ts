@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, forwardRef, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, HostBinding, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { generate } from 'shortid';
 import { noop } from 'rxjs';
@@ -60,9 +60,8 @@ export class ToggleComponent
     this.onTouch = fn;
   }
 
-  onCheckboxChange(value: any, $event: Event) {
-    console.log(value, $event)
-    this.value = !!this.value;
+  onCheckboxChange(val: any, $event: Event) {
+    this.value = !val;
   }
 
   ngOnInit() {
