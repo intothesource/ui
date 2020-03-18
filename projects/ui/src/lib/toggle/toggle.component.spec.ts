@@ -138,7 +138,7 @@ describe('ToggleComponent', () => {
       TestBed.compileComponents();
     }));
 
-    fit('should use the value that was provided', async(() => {
+    it('should use the value that was provided', async(() => {
       const fixture = TestBed.createComponent(ToggleWithNgModelTestComponent);
       fixture.detectChanges();
 
