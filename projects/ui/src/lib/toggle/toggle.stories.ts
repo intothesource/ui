@@ -11,7 +11,7 @@ storiesOf('Toggle', module)
   .addDecorator(withA11y)
   .addDecorator(
     moduleMetadata({
-      imports: [ToggleModule],
+      imports: [ToggleModule, FormsModule],
     })
   )
   .add('basic', () => ({

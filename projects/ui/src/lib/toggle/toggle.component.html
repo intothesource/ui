@@ -1,9 +1,9 @@
 <input type="checkbox"
   class="visually-hidden"
-  [(ngModel)]="value"
   [checked]="value"
   [name]="name"
-  [id]="id">
+  [id]="id"
+  (change)="onCheckboxChange(value, $event)">
 <label class="its-toggle__control"
   [for]="id">
   <div class="its-toggle__control__track"></div>

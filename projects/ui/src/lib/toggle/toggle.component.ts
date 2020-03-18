@@ -60,6 +60,11 @@ export class ToggleComponent
     this.onTouch = fn;
   }
 
+  onCheckboxChange(value: any, $event: Event) {
+    console.log(value, $event)
+    this.value = !!this.value;
+  }
+
   ngOnInit() {
     if (!this.$id) { this.$id = generate(); }
     if (!this.$name) { this.$name = generate(); }
