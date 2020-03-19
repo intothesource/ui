@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ToggleModule } from './toggle.module';
 
-fdescribe('ToggleModule', () => {
+describe('ToggleModule', () => {
 
   describe('basic operations', () => {
 
