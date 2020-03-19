@@ -4,24 +4,28 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from './button/button.module';
 import { ToggleModule } from './toggle/toggle.module';
 import { DropdownModule } from './dropdown/dropdown.module';
-
-import { RippleAnimationComponent } from './ripple-animation/ripple-animation.component';
+import { RippleAnimationModule } from './ripple-animation/ripple-animation.module';
 
 @NgModule({
   declarations: [
-    RippleAnimationComponent,
+    ButtonModule,
+    ToggleModule,
+    DropdownModule,
+    RippleAnimationModule
   ],
   imports: [
     FormsModule,
-    DropdownModule,
     ButtonModule,
     ToggleModule,
+    DropdownModule,
+    RippleAnimationModule
   ],
   exports: [
     FormsModule,
-    DropdownModule,
     ButtonModule,
     ToggleModule,
+    DropdownModule,
+    RippleAnimationModule
   ]
 })
 export class UiModule { }
