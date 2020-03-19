@@ -33,6 +33,9 @@ jobs:
 
       - run: npm ci
 
+      - name: Test UI Library
+        run: npm run test -- ui --no-watch --no-progress --browsers=ChromeHeadlessCI
+
       - name: Build storybook
         run: npm run build-storybook || true
 
