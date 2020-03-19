@@ -29,7 +29,6 @@ describe('AppComponent', () => {
   it(`should have as title 'UI Component Library'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    console.log(app)
     expect(app.title).toEqual('UI Component Library');
   });
 
