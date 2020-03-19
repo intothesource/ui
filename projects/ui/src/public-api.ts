@@ -16,3 +16,7 @@ export * from './lib/button/button.component';
 // Toggle
 export * from './lib/toggle/toggle.module';
 export * from './lib/toggle/toggle.component';
+
+// Ripple Animation
+export * from './lib/ripple-animation/ripple-animation.module';
+export * from './lib/ripple-animation/ripple-animation.component';

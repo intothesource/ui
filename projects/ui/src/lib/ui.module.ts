@@ -7,12 +7,6 @@ import { DropdownModule } from './dropdown/dropdown.module';
 import { RippleAnimationModule } from './ripple-animation/ripple-animation.module';
 
 @NgModule({
-  declarations: [
-    ButtonModule,
-    ToggleModule,
-    DropdownModule,
-    RippleAnimationModule
-  ],
   imports: [
     FormsModule,
     ButtonModule,
