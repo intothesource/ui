@@ -1,9 +1,9 @@
 import { async, TestBed, tick, fakeAsync } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
 
 import { ToggleComponent } from './toggle.component';
-import { Component } from '@angular/core';
 
 describe('ToggleComponent', () => {
 
