@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ui-example';
+  title = 'UI Component Library';
   box = false;
   box2 = false;
   onBoxChanged(val, $event) {
