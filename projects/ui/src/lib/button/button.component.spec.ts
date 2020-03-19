@@ -10,14 +10,14 @@ describe('Button', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        declarations: [Button, ButtonComponent],
+        declarations: [ButtonTestComponent, ButtonComponent],
       });
 
       TestBed.compileComponents();
     }));
 
     it('should create on button', () => {
-      const fixture = TestBed.createComponent(Button);
+      const fixture = TestBed.createComponent(ButtonTestComponent);
       const buttonDebugElement = fixture.debugElement.query(By.directive(ButtonComponent));
 
       fixture.detectChanges();
@@ -25,7 +25,7 @@ describe('Button', () => {
     });
 
     it('should add `its-button` class to `<button>` element', () => {
-      const fixture = TestBed.createComponent(Button);
+      const fixture = TestBed.createComponent(ButtonTestComponent);
       const buttonDebugElement = fixture.debugElement.query(By.directive(ButtonComponent));
 
       fixture.detectChanges();
@@ -37,14 +37,14 @@ describe('Button', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        declarations: [Anchor, ButtonComponent],
+        declarations: [AnchorTestComponent, ButtonComponent],
       });
 
       TestBed.compileComponents();
     }));
 
     it('should create on anchor', () => {
-      const fixture = TestBed.createComponent(Anchor);
+      const fixture = TestBed.createComponent(AnchorTestComponent);
       const aDebugElement = fixture.debugElement.query(By.directive(ButtonComponent));
 
       fixture.detectChanges();
@@ -52,7 +52,7 @@ describe('Button', () => {
     });
 
     it('should add `its-button` class to `<a>` element', () => {
-      const fixture = TestBed.createComponent(Anchor);
+      const fixture = TestBed.createComponent(AnchorTestComponent);
       const aDebugElement = fixture.debugElement.query(By.directive(ButtonComponent));
 
       fixture.detectChanges();
@@ -64,14 +64,14 @@ describe('Button', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        declarations: [WithColor, ButtonComponent],
+        declarations: [WithColorTestComponent, ButtonComponent],
       });
 
       TestBed.compileComponents();
     }));
 
     it('should add `its-button--color-primary` class to `[color="primary"]` element', () => {
-      const fixture = TestBed.createComponent(WithColor);
+      const fixture = TestBed.createComponent(WithColorTestComponent);
       const buttonDebugElement = fixture.debugElement.query(By.directive(ButtonComponent));
 
       fixture.detectChanges();
@@ -83,14 +83,14 @@ describe('Button', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        declarations: [WithOutline, ButtonComponent],
+        declarations: [WithOutlineTestComponent, ButtonComponent],
       });
 
       TestBed.compileComponents();
     }));
 
     it('should add `its-button--outline` class to `[[outline]="true"]` element', () => {
-      const fixture = TestBed.createComponent(WithOutline);
+      const fixture = TestBed.createComponent(WithOutlineTestComponent);
       const buttonDebugElement = fixture.debugElement.query(By.directive(ButtonComponent));
 
       fixture.detectChanges();
@@ -102,14 +102,14 @@ describe('Button', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        declarations: [WithOutlineAndColor, ButtonComponent],
+        declarations: [WithOutlineAndColorTestComponent, ButtonComponent],
       });
 
       TestBed.compileComponents();
     }));
 
     it('should add `its-button--outline` class to `[[outline]="true"]` element', () => {
-      const fixture = TestBed.createComponent(WithOutlineAndColor);
+      const fixture = TestBed.createComponent(WithOutlineAndColorTestComponent);
       const buttonDebugElement = fixture.debugElement.query(By.directive(ButtonComponent));
 
       fixture.detectChanges();
@@ -123,24 +123,24 @@ describe('Button', () => {
 @Component({
   template: `<button its-button>Foo</button>`
 })
-class Button { }
+class ButtonTestComponent { }
 
 @Component({
   template: `<a its-button>Foo</a>`
 })
-class Anchor { }
+class AnchorTestComponent { }
 
 @Component({
   template: `<button its-button color="primary">Foo</button>`
 })
-class WithColor { }
+class WithColorTestComponent { }
 
 @Component({
   template: `<button its-button [outline]="true">Foo</button>`
 })
-class WithOutline { }
+class WithOutlineTestComponent { }
 
 @Component({
   template: `<button its-button color="primary" [outline]="true">Chef</button>`
 })
-class WithOutlineAndColor { }
+class WithOutlineAndColorTestComponent { }
