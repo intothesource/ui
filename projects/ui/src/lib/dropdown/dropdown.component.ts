@@ -1,5 +1,6 @@
-import { Component, ViewEncapsulation, HostBinding, OnInit, ViewChildren, ViewChild, ElementRef, forwardRef, ContentChildren, QueryList, Input } from '@angular/core';
-import { DropdownItemComponent } from "./dropdown-item.component";
+import { Component, ViewEncapsulation, HostBinding, OnInit, ViewChildren, ViewChild, ElementRef, forwardRef, ContentChildren, QueryList, Input }
+  from '@angular/core';
+import { DropdownItemComponent } from './dropdown-item.component';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -17,24 +18,6 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 
 export class DropdownComponent {
-  onChange: any = () => { };
-  onTouch: any = () => { };
-
-  @ContentChildren(DropdownItemComponent) dropdownItems!: QueryList<DropdownItemComponent>;
-
-  writeValue(value: any) {
-    this.selected = value;
-  }
-
-  registerOnChange(fn: any) {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any) {
-    this.onTouch = fn;
-  }
-
-  $selected: any;
   @Input()
   get selected() {
     return this.$selected;
@@ -46,16 +29,34 @@ export class DropdownComponent {
     this.onTouch(this.$selected);
   }
 
-  @Input()
-  options: any[] = [];
-
-  /**
+    /**
      * Getter for elements created inside <ng-content> or the [options] attribute
      */
   get elements(): QueryList<DropdownItemComponent> {
     if (this.dropdownItems && this.dropdownItems.length)
       return this.dropdownItems;
     else return new QueryList();
+  }
+
+  @ContentChildren(DropdownItemComponent) dropdownItems!: QueryList<DropdownItemComponent>;
+
+  $selected: any;
+
+  @Input()
+  options: any[] = [];
+  onChange: any = () => { };
+  onTouch: any = () => { };
+
+  writeValue(value: any) {
+    this.selected = value;
+  }
+
+  registerOnChange(fn: any) {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any) {
+    this.onTouch = fn;
   }
 
   ngAfterViewInit() {

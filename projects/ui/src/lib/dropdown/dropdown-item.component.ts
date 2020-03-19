@@ -6,11 +6,11 @@ import {
   HostBinding,
   HostListener,
   ViewEncapsulation
-} from "@angular/core";
+} from '@angular/core';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
-  selector: "its-dropdown-item",
+  selector: 'its-dropdown-item',
   template: `
     <ng-content></ng-content>
   `,
@@ -39,18 +39,19 @@ export class DropdownItemComponent {
   @Output()
   selectedted = new EventEmitter<boolean>();
 
-  @HostBinding("class")
+  @HostBinding('class')
   get classes() {
-    const classes = ["its-select-option"];
+    const classes = ['its-select-option'];
 
     if (this.selected !== undefined) {
-      classes.push("its-select-option--selected");
+      console.log('What is selected: ', this.selected);
+      classes.push('its-select-option--selected');
     }
 
-    return classes.join(" ");
+    return classes.join(' ');
   }
 
-  @HostListener("click")
+  @HostListener('click')
   onClick() {
     this.selectedted.emit(true);
   }
