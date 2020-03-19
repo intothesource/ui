@@ -1,3 +1,7 @@
+![CI](https://github.com/intothesource/ui/workflows/CI/badge.svg)
+
+---
+
 # Ui
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.18.
