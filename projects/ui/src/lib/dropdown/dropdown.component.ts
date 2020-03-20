@@ -1,5 +1,13 @@
-import { Component, ViewEncapsulation, HostBinding, OnInit, ViewChildren, ViewChild, ElementRef, forwardRef, ContentChildren, QueryList, Input }
-  from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  HostBinding, OnInit,
+  ViewChildren, ViewChild, ElementRef,
+  forwardRef,
+  ContentChildren,
+  QueryList, Input,
+  AfterViewInit
+} from '@angular/core';
 import { DropdownItemComponent } from './dropdown-item.component';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -17,7 +25,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   ]
 })
 
-export class DropdownComponent {
+export class DropdownComponent implements AfterViewInit {
   @Input()
   get selected() {
     return this.$selected;
@@ -29,9 +37,9 @@ export class DropdownComponent {
     this.onTouch(this.$selected);
   }
 
-    /**
-     * Getter for elements created inside <ng-content> or the [options] attribute
-     */
+  /**
+   * Getter for elements created inside <ng-content> or the [options] attribute
+   */
   get elements(): QueryList<DropdownItemComponent> {
     if (this.dropdownItems && this.dropdownItems.length)
       return this.dropdownItems;
