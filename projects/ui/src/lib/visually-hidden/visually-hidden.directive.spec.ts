@@ -37,7 +37,7 @@ describe('VisuallyHiddenDirective', () => {
       expect(checkboxDebugElement.nativeElement.classList.contains('its-visually-hidden')).toBe(true);
     });
 
-    fit('should not be invisible to screen readers', () => {
+    it('should not be invisible to screen readers', () => {
       const fixture = TestBed.createComponent(VisuallyHiddenTestComponent);
       const testDebugElement = fixture.debugElement;
       const checkboxDebugElement = testDebugElement.query(By.directive(VisuallyHiddenDirective));
