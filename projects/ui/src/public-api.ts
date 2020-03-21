@@ -4,6 +4,16 @@
 
 export * from './lib/ui.module';
 
+//
+// Services
+// -----------------------------------------------------------------------------
+
+export * from './lib/directive-styles.service';
+
+//
+// Components & Directives
+// -----------------------------------------------------------------------------
+
 // Dropdown
 export * from './lib/dropdown/dropdown.module';
 export * from './lib/dropdown/dropdown.component';
@@ -20,3 +30,8 @@ export * from './lib/toggle/toggle.component';
 // Ripple Animation
 export * from './lib/ripple-animation/ripple-animation.module';
 export * from './lib/ripple-animation/ripple-animation.component';
+
+// Visually Hidden
+export * from './lib/visually-hidden/visually-hidden.module';
+export * from './lib/visually-hidden/visually-hidden.directive';
+export * from './lib/visually-hidden/visually-hidden.component';

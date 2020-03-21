@@ -6,7 +6,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import { FormsModule } from '@angular/forms';
 import { ToggleModule } from './toggle.module';
 
-storiesOf('Toggle', module)
+storiesOf('components|Toggle', module)
   .addDecorator(withKnobs)
   .addDecorator(withA11y)
   .addDecorator(
