@@ -1,13 +1,15 @@
-import { Directive, HostBinding, Inject } from '@angular/core';
+import { Component, HostBinding, ViewEncapsulation, Inject } from '@angular/core';
 
 import { DirectiveStylesService } from '../directive-styles.service';
 import { VISUALLY_HIDDEN_STYLES } from './visually-hidden.styles';
 import { VISUALLY_HIDDEN_STYLESHEET_NAME } from './visually-hidden.constants';
 
-@Directive({
-  selector: '[itsVisuallyHidden]',
+@Component({
+  selector: 'its-visually-hidden',
+  template: `<ng-content></ng-content>`,
+  encapsulation: ViewEncapsulation.None,
 })
-export class VisuallyHiddenDirective {
+export class VisuallyHiddenComponent {
 
   @HostBinding('class.its-visually-hidden')
   itsVisuallyHidden = true
