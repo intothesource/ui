@@ -1,4 +1,4 @@
-import { async, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
 
