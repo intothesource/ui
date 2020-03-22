@@ -1,7 +1,0 @@
-jobs:
-  node_setup:
-    name: NodeJS Setup
-      steps:
-        - uses: actions/setup-node@v1
-          with:
-            node-version: "10.x"

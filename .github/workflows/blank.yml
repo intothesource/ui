@@ -21,8 +21,15 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/node-setup
-      - uses: ./.github/actions/npm-cache
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+      - uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - run: npm ci
 
