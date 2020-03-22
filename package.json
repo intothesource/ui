@@ -8,6 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "e2e:watch": "concurrently --kill-others \"npm run ng -- serve ui-example\" \"npm run e2e:watch-no-serve\"",
+    "e2e:watch-no-serve": "wait-on http-get://localhost:4200 && watch \"npm run e2e -- --devServerTarget=\" projects/ui-example/e2e --wait=1",
     "storybook": "start-storybook -p 6006 --ci",
     "build-storybook": "build-storybook -c .storybook -o .storybook-out",
     "deploy:gh-pages": "gh-pages -d .storybook-out"
@@ -46,6 +48,7 @@
     "@types/shortid": "0.0.29",
     "babel-loader": "^8.0.6",
     "codelyzer": "^5.1.2",
+    "concurrently": "^5.1.0",
     "gh-pages": "^2.2.0",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -59,6 +62,8 @@
     "storybook-dark-mode": "^0.3.1",
     "ts-node": "~8.6.2",
     "tslint": "~6.0.0",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "wait-on": "^4.0.1",
+    "watch": "^1.0.2"
   }
 }
