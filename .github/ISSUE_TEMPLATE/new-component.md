@@ -8,3 +8,7 @@ assignees: ''
 ---
 
 
+## Definition of Done
+
+- [ ] Component/Directive/Service has tests.
+- [ ] Component/Directive/Service has Storybook Stories.
