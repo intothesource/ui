@@ -52,7 +52,7 @@ jobs:
         run: npm run ng -- e2e --protractor-config=projects/ui-example/e2e/protractor-ci.conf.js
 
       - name: Build storybook
-        run: npm run build-storybook || true
+        run: npm run build-storybook
 
       - name: Install SSH Client 🔑
         uses: webfactory/ssh-agent@v0.2.0
