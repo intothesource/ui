@@ -58,7 +58,6 @@
     "karma-jasmine-html-reporter": "^1.4.0",
     "ng-packagr": "^9.0.0",
     "protractor": "~5.4.0",
-    "storybook-dark-mode": "^0.3.1",
     "ts-node": "~8.6.2",
     "tslint": "~6.0.0",
     "typescript": "^3.7.5",
