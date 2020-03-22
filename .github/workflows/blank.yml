@@ -36,6 +36,12 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Build UI Library
+        run: npm run ng -- build ui
+
+      - name: Build Example Pages
+        run: npm run ng -- build ui-example
+
       - name: Karma Test UI Library
         run: npm run test -- ui --no-watch --no-progress --browsers=ChromeHeadlessCI
 
