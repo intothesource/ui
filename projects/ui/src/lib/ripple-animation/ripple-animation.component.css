@@ -1,3 +1,16 @@
+:host {
+  position: relative;
+}
+
 .ripple-animation__container {
+  display: block;
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   background: red;
+  z-index: -1;
 }
