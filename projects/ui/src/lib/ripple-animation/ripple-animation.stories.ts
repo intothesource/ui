@@ -16,5 +16,7 @@ storiesOf('Ripple Animation', module)
   .add('Default container', () => ({
     template:`
     <p its-ripple-animation>Dit is een test tekst</p>
+    <div style="width: 200px; height: 100px" its-ripple-animation></div>
+    <button its-ripple-animation>Dit is een button</button>
     `
   }))
