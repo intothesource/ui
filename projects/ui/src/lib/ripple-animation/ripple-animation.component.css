@@ -14,3 +14,10 @@
   background: red;
   z-index: -1;
 }
+
+.ripple {
+  width: 1px;
+  height: 1px;
+  position: relative;
+  color: palevioletred;
+}

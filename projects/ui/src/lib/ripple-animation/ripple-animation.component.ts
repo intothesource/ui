@@ -20,6 +20,12 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
   @HostListener('click', ['$event'])
   handleClick(event: MouseEvent) {
     console.log('CLICKED:', event, this.rippleContainer);
+    this.createRipple(0, 0, 'test');
+  }
+
+  @HostListener('mousedown', ['$event'])
+  handleMouseDown(event: MouseEvent) {
+    console.log('HOLDING:', event, this.rippleContainer);
   }
 
   ngOnInit() {
@@ -28,6 +34,12 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     console.log('LOADED:', this.rippleContainer);
+  }
+
+  createRipple(x: number, y: number, color: string) {
+    const newRipple = document.createElement('span');
+    newRipple.classList.add('ripple');
+    this.rippleContainer.nativeElement.appendChild(newRipple);
   }
 
 }
