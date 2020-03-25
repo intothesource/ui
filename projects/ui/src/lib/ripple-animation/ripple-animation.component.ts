@@ -1,11 +1,12 @@
-import { Component, OnInit, AfterViewInit, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostListener, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 
 export const maxRipples = 6;
 
 @Component({
   selector: '[its-ripple-animation], its-ripple-animation',
   templateUrl: './ripple-animation.component.html',
-  styleUrls: ['./ripple-animation.component.css']
+  styleUrls: ['./ripple-animation.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class RippleAnimationComponent implements OnInit, AfterViewInit {
 
