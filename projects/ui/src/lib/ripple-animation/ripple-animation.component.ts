@@ -15,17 +15,20 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
 
   rippleAmount = 0;
   rippleAllowed = true;
+  holdingMouseDown = false;
 
   @ViewChild('rippleContainer', { static: false }) rippleContainer: ElementRef;
 
   @HostListener('click', ['$event'])
   handleClick(event: MouseEvent) {
+    this.holdingMouseDown = false;
     console.log('CLICKED:', event, this.rippleContainer);
     this.createRipple(0, 0, 'test');
   }
 
   @HostListener('mousedown', ['$event'])
   handleMouseDown(event: MouseEvent) {
+    this.holdingMouseDown = true;
     console.log('HOLDING:', event, this.rippleContainer);
   }
 
