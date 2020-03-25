@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 
 export const maxRipples = 6;
 
@@ -9,15 +9,17 @@ export const maxRipples = 6;
 })
 export class RippleAnimationComponent implements OnInit {
 
-  rippleAmount: number = 0;
-  rippleAllowed: boolean = true;
+  constructor() {
+  }
+
+  rippleAmount = 0;
+  rippleAllowed = true;
+
+  @ViewChild('ripple-animation__container') rippleContainer !: ElementRef;
 
   @HostListener('click', ['$event'])
   handleClick(event: MouseEvent) {
     console.log('CLICKED:', event);
-  }
-
-  constructor() {
   }
 
   ngOnInit() {
