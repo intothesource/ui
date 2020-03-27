@@ -16,6 +16,7 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
   rippleAmount = 0;
   rippleAllowed = true;
   holdingMouseDown = false;
+  baseColor = 'green';
 
   @ViewChild('rippleContainer', { static: false }) rippleContainer: ElementRef;
 
