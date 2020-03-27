@@ -1,4 +1,4 @@
-:host {
+.its-ripple-animation {
   position: relative;
 }
 
@@ -11,6 +11,7 @@
   left:0;
   background: red;
   z-index: -1;
+  overflow: hidden;
 }
 
 .ripple {
@@ -18,5 +19,9 @@
   width: 1px;
   height: 1px;
   position: relative;
-  color: palevioletred;
+  background: green;
+  border-radius: 50%;
+  transition: transform 1s ease-in-out;
+  transform: scale(0);
+  z-index: 1;
 }

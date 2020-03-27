@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, HostListener, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostListener, ViewChild, ElementRef, ViewEncapsulation, HostBinding } from '@angular/core';
 
 export const maxRipples = 6;
 
@@ -19,17 +19,30 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
 
   @ViewChild('rippleContainer', { static: false }) rippleContainer: ElementRef;
 
-  @HostListener('click', ['$event'])
-  handleClick(event: MouseEvent) {
+  @HostListener('mouseup', ['$event'])
+  handleMouseUp(event: MouseEvent) {
     this.holdingMouseDown = false;
     console.log('CLICKED:', event, this.rippleContainer);
-    this.createRipple(0, 0, 'test');
   }
 
   @HostListener('mousedown', ['$event'])
   handleMouseDown(event: MouseEvent) {
     this.holdingMouseDown = true;
-    console.log('HOLDING:', event, this.rippleContainer);
+    this.createRipple(event.offsetX, event.offsetY, 'test');
+    console.log('HOLDING:', event.offsetX, event.offsetY, this.rippleContainer, this.containerBiggestDimension);
+  }
+
+  @HostBinding('class')
+  get classes() {
+    return 'its-ripple-animation';
+  }
+
+  get containerBiggestDimension() {
+    const dimensions = this.rippleContainer.nativeElement.getBoundingClientRect();
+    if (dimensions.width > dimensions.height) {
+      return dimensions.width;
+    }
+    return dimensions.height;
   }
 
   ngOnInit() {
@@ -43,7 +56,12 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
   createRipple(x: number, y: number, color: string) {
     const newRipple = document.createElement('span');
     newRipple.classList.add('ripple');
+    newRipple.style.left = `${x}px`;
+    newRipple.style.top = `${y}px`;
     this.rippleContainer.nativeElement.appendChild(newRipple);
+    // Get biggest dimension in pixels, multiply by 2 to accomodate for click location and use as scale.
+    newRipple.style.transform = `scale(${this.containerBiggestDimension * 2})`;
+
   }
 
 }
