@@ -15,6 +15,7 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
 
   rippleAmount = 0;
   rippleAllowed = true;
+  rippleArray = [];
   holdingMouseDown = false;
   baseColor = 'green';
 
@@ -23,6 +24,7 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
   @HostListener('mouseup', ['$event'])
   handleMouseUp(event: MouseEvent) {
     this.holdingMouseDown = false;
+    this.destroyRipple(this.rippleArray.pop());
     console.log('CLICKED:', event, this.rippleContainer);
   }
 
@@ -60,9 +62,13 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
     newRipple.style.left = `${x}px`;
     newRipple.style.top = `${y}px`;
     this.rippleContainer.nativeElement.appendChild(newRipple);
+    this.rippleArray.push(newRipple);
     // Get biggest dimension in pixels, multiply by 2 to accomodate for click location and use as scale.
     newRipple.style.transform = `scale(${this.containerBiggestDimension * 2})`;
+  }
 
+  destroyRipple(rippleElement: Element) {
+    rippleElement.remove();
   }
 
 }
