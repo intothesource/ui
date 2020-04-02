@@ -21,7 +21,7 @@
   position: relative;
   background: green;
   border-radius: 50%;
-  transition: transform 1s ease-in-out;
+  transition: transform 0.5s ease-in-out;
   transform: scale(0);
   z-index: 1;
   opacity: 0.5;
