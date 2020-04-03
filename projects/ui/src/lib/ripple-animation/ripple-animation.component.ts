@@ -18,14 +18,16 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
   rippleArray = [];
   holdingMouseDown = false;
   baseColor = 'green';
+  rippleTransitionEnded = false;
 
   @ViewChild('rippleContainer', { static: false }) rippleContainer: ElementRef;
 
   @HostListener('mouseup', ['$event'])
   handleMouseUp(event: MouseEvent) {
-    // this.holdingMouseDown = false;
-    // const rippleToDestroy = this.rippleArray.pop();
-    // this.destroyRipple(rippleToDestroy);
+    this.holdingMouseDown = false;
+    if (this.rippleTransitionEnded) {
+      this.destroyRipple(this.rippleArray.pop());
+    }
     console.log('CLICKED:', event, this.rippleContainer);
   }
 
@@ -59,6 +61,11 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
 
   createRipple(x: number, y: number, color: string) {
     const newRipple = document.createElement('span');
+    const mouseUpHandler = (() => {
+      this.rippleContainer.nativeElement.removeEventListener('mouseup', mouseUpHandler);
+      console.log('DESTROYING RIPPLE DUE TO EVENT');
+      this.destroyRipple(newRipple);
+    }).bind(this);
     newRipple.classList.add('ripple');
     newRipple.style.left = `${x}px`;
     newRipple.style.top = `${y}px`;
@@ -66,14 +73,13 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
     this.rippleArray.push(newRipple);
     // Get biggest dimension in pixels, multiply by 2 to accomodate for click location and use as scale.
     newRipple.style.transform = `scale(${this.containerBiggestDimension * 2.3})`;
+    this.rippleTransitionEnded = false;
     // newRipple.style.transform = `scale(1)`;
     newRipple.addEventListener('transitionend', e => {
+      this.rippleTransitionEnded = true;
       console.log('TRANSITION ENDED:', e, this.holdingMouseDown);
       if (this.holdingMouseDown) {
-        newRipple.addEventListener('mouseup', () => {
-          console.log('DESTROYING RIPPLE DUE TO EVENT');
-          this.destroyRipple(newRipple);
-        });
+        // this.rippleContainer.nativeElement.addEventListener('mouseup', mouseUpHandler);
       } else {
         this.destroyRipple(newRipple);
       }

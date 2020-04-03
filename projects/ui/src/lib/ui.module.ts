@@ -6,6 +6,7 @@ import { ToggleModule } from './toggle/toggle.module';
 import { DropdownModule } from './dropdown/dropdown.module';
 import { RippleAnimationModule } from './ripple-animation/ripple-animation.module';
 import { VisuallyHiddenModule } from './visually-hidden/visually-hidden.module';
+import { RippleComponent } from './ripple/ripple.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { VisuallyHiddenModule } from './visually-hidden/visually-hidden.module';
     DropdownModule,
     RippleAnimationModule,
     VisuallyHiddenModule,
-  ]
+  ],
+  declarations: [RippleComponent]
 })
 export class UiModule { }
