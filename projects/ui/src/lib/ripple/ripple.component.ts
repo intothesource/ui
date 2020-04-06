@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'its-ripple',
@@ -7,11 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RippleComponent implements OnInit {
 
+  @Input() x: number;
+  @Input() y: number;
+  @Input() color: string;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
 
+  }
 
 }
