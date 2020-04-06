@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Renderer2, ElementRef, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'its-ripple',
   templateUrl: './ripple.component.html',
   styleUrls: ['./ripple.component.css']
 })
-export class RippleComponent implements OnInit {
+export class RippleComponent implements OnInit, OnDestroy {
 
   @Input() x: number;
   @Input() y: number;
