@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, HostListener, ViewChild, ElementRef, ViewEncapsulation, HostBinding } from '@angular/core';
+import { RippleComponent } from '../ripple/ripple.component';
 
 export const maxRipples = 6;
 
@@ -60,30 +61,32 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
   }
 
   createRipple(x: number, y: number, color: string) {
-    const newRipple = document.createElement('span');
-    const mouseUpHandler = (() => {
-      this.rippleContainer.nativeElement.removeEventListener('mouseup', mouseUpHandler);
-      console.log('DESTROYING RIPPLE DUE TO EVENT');
-      this.destroyRipple(newRipple);
-    }).bind(this);
-    newRipple.classList.add('ripple');
-    newRipple.style.left = `${x}px`;
-    newRipple.style.top = `${y}px`;
-    this.rippleContainer.nativeElement.appendChild(newRipple);
-    this.rippleArray.push(newRipple);
+    // const newRipple = document.createElement('span');
+
+    // const mouseUpHandler = (() => {
+    //   this.rippleContainer.nativeElement.removeEventListener('mouseup', mouseUpHandler);
+    //   console.log('DESTROYING RIPPLE DUE TO EVENT');
+    //   this.destroyRipple(newRipple);
+    // }).bind(this);
+    // newRipple.classList.add('ripple');
+    // newRipple.style.left = `${x}px`;
+    // newRipple.style.top = `${y}px`;
+    // this.rippleContainer.nativeElement.appendChild(newRipple);
+    // const newRipple = new RippleComponent(x, y, color);
+    this.rippleArray.push({x, y, color});
     // Get biggest dimension in pixels, multiply by 2 to accomodate for click location and use as scale.
-    newRipple.style.transform = `scale(${this.containerBiggestDimension * 2.3})`;
+    // newRipple.style.transform = `scale(${this.containerBiggestDimension * 2.3})`;
     this.rippleTransitionEnded = false;
     // newRipple.style.transform = `scale(1)`;
-    newRipple.addEventListener('transitionend', e => {
-      this.rippleTransitionEnded = true;
-      console.log('TRANSITION ENDED:', e, this.holdingMouseDown);
-      if (this.holdingMouseDown) {
-        // this.rippleContainer.nativeElement.addEventListener('mouseup', mouseUpHandler);
-      } else {
-        this.destroyRipple(newRipple);
-      }
-    })
+    // newRipple.addEventListener('transitionend', e => {
+    //   this.rippleTransitionEnded = true;
+    //   console.log('TRANSITION ENDED:', e, this.holdingMouseDown);
+    //   if (this.holdingMouseDown) {
+    //     // this.rippleContainer.nativeElement.addEventListener('mouseup', mouseUpHandler);
+    //   } else {
+    //     this.destroyRipple(newRipple);
+    //   }
+    // })
   }
 
   destroyRipple(rippleElement: Element) {

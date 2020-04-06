@@ -14,6 +14,7 @@ export class RippleComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.x, this.y, this.color);
   }
 
   ngOnDestroy(): void {
