@@ -35,7 +35,7 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
   @HostListener('mousedown', ['$event'])
   handleMouseDown(event: MouseEvent) {
     this.holdingMouseDown = true;
-    this.createRipple(event.offsetX, event.offsetY, 'test');
+    this.createRipple(event.offsetX, event.offsetY, this.containerBiggestDimension, 'test');
     console.log('HOLDING:', event.offsetX, event.offsetY, this.rippleContainer, this.containerBiggestDimension);
   }
 
@@ -60,7 +60,7 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
     console.log('LOADED:', this.rippleContainer);
   }
 
-  createRipple(x: number, y: number, color: string) {
+  createRipple(x: number, y: number, biggestDimension: number, color: string) {
     // const newRipple = document.createElement('span');
 
     // const mouseUpHandler = (() => {
@@ -73,7 +73,7 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
     // newRipple.style.top = `${y}px`;
     // this.rippleContainer.nativeElement.appendChild(newRipple);
     // const newRipple = new RippleComponent(x, y, color);
-    this.rippleArray.push({x, y, color});
+    this.rippleArray.push({x, y, biggestDimension, color});
     // Get biggest dimension in pixels, multiply by 2 to accomodate for click location and use as scale.
     // newRipple.style.transform = `scale(${this.containerBiggestDimension * 2.3})`;
     this.rippleTransitionEnded = false;

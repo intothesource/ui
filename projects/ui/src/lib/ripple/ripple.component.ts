@@ -9,21 +9,27 @@ export class RippleComponent implements OnInit, OnDestroy {
 
   @Input() x: number;
   @Input() y: number;
+  @Input() biggestDimension: number;
   @Input() color: string;
 
   constructor(private renderer: Renderer2, private elementRef: ElementRef) { }
 
   ngOnInit(): void {
     console.log(this.x, this.y, this.color);
-    this.setScale(100);
+    // this.setScale(100);
   }
 
   ngOnDestroy(): void {
-
+    this.renderer.destroy();
   }
 
-  setScale(scale: number) {
-    this.renderer.setStyle(this.elementRef.nativeElement, 'transform', `scale(${scale})`);
+  set rippleSize(size: number) {
+    this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${size}px`);
+    this.renderer.setStyle(this.elementRef.nativeElement, 'height', `${size}px`)
   }
+
+  // setScale(scale: number) {
+  //   this.renderer.setStyle(this.elementRef.nativeElement, 'transform', `scale(${scale})`);
+  // }
 
 }
