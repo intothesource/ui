@@ -62,19 +62,12 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
   }
 
   createRipple(x: number, y: number, biggestDimension: number, color: string) {
-    // const newRipple = document.createElement('span');
+    const dimensions = this.rippleContainer.nativeElement.getBoundingClientRect();
 
-    // const mouseUpHandler = (() => {
-    //   this.rippleContainer.nativeElement.removeEventListener('mouseup', mouseUpHandler);
-    //   console.log('DESTROYING RIPPLE DUE TO EVENT');
-    //   this.destroyRipple(newRipple);
-    // }).bind(this);
-    // newRipple.classList.add('ripple');
-    // newRipple.style.left = `${x}px`;
-    // newRipple.style.top = `${y}px`;
-    // this.rippleContainer.nativeElement.appendChild(newRipple);
-    // const newRipple = new RippleComponent(x, y, color);
-    this.rippleArray.push({x, y, biggestDimension, color});
+    const relativeX = (dimensions.width - x) - (biggestDimension);
+    const relativeY = (dimensions.height - y) - (biggestDimension);
+    console.log('RELATIVE DIMENSION', relativeX, relativeY);
+    this.rippleArray.push({relativeX, relativeY, biggestDimension, color});
     // Get biggest dimension in pixels, multiply by 2 to accomodate for click location and use as scale.
     // newRipple.style.transform = `scale(${this.containerBiggestDimension * 2.3})`;
     this.rippleTransitionEnded = false;

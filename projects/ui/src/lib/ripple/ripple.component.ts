@@ -17,10 +17,9 @@ export class RippleComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log(this.x, this.y, this.color);
     // this.setScale(100);
-    this.setRippleLocation(this.x, this.y);
-    this.setRippleColor(this.color);
     this.setRippleSize(this.biggestDimension);
-
+    this.setRippleColor(this.color);
+    this.setRippleLocation(this.x, this.y);
     this.renderer.setStyle(this.elementRef.nativeElement, 'transform', 'scale(1)');
   }
 
@@ -30,8 +29,8 @@ export class RippleComponent implements OnInit, OnDestroy {
 
   setRippleSize(size: number) {
     // Calculate max ripple size and set as width and height
-    this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${size*2.3}px`);
-    this.renderer.setStyle(this.elementRef.nativeElement, 'height', `${size*2.3}px`)
+    this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${size * 2.3}px`);
+    this.renderer.setStyle(this.elementRef.nativeElement, 'height', `${size * 2.3}px`)
   }
 
   setRippleLocation(x: number, y: number) {
