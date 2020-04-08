@@ -1,4 +1,6 @@
-import { Component, OnInit, AfterViewInit, HostListener, ViewChild, ElementRef, ViewEncapsulation, HostBinding, Input } from '@angular/core';
+import {
+  Component, OnInit, AfterViewInit, HostListener, ViewChild, ElementRef, ViewEncapsulation, HostBinding, Input
+} from '@angular/core';
 import { RippleComponent } from '../ripple/ripple.component';
 
 export const maxRipples = 6;
@@ -67,7 +69,7 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
     const relativeX = (dimensions.width - x) - (biggestDimension);
     const relativeY = (dimensions.height - y) - (biggestDimension);
     console.log('RELATIVE DIMENSION', relativeX, relativeY);
-    this.rippleArray.push({relativeX, relativeY, biggestDimension, color});
+    this.rippleArray.push({ relativeX, relativeY, biggestDimension, color });
     // Get biggest dimension in pixels, multiply by 2 to accomodate for click location and use as scale.
     // newRipple.style.transform = `scale(${this.containerBiggestDimension * 2.3})`;
     this.rippleTransitionEnded = false;
