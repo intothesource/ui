@@ -30,7 +30,7 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
   handleMouseUp(event: MouseEvent) {
     this.holdingMouseDown = false;
     if (this.rippleTransitionEnded) {
-      this.destroyRipple(this.rippleArray.pop());
+      this.rippleArray.pop();
     }
     console.log('CLICKED:', event, this.rippleContainer);
   }

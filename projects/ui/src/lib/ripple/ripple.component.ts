@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Renderer2, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Renderer2, ElementRef, OnDestroy, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'its-ripple',
@@ -12,6 +12,8 @@ export class RippleComponent implements OnInit, OnDestroy {
   @Input() biggestDimension: number;
   @Input() color: string;
 
+  @Output() killMe = new EventEmitter();
+
   constructor(private renderer: Renderer2, private elementRef: ElementRef) { }
 
   ngOnInit(): void {
@@ -21,6 +23,9 @@ export class RippleComponent implements OnInit, OnDestroy {
     this.setRippleColor(this.color);
     this.setRippleLocation(this.x, this.y);
     this.renderer.setStyle(this.elementRef.nativeElement, 'transform', 'scale(1)');
+    setTimeout(() => {
+      this.killMe.emit();
+    }, 300);
   }
 
   ngOnDestroy(): void {
