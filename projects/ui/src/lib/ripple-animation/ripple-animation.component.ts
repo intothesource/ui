@@ -85,8 +85,18 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
     // })
   }
 
-  destroyRipple(rippleElement: Element) {
-    rippleElement.remove();
+  destroyRipple() {
+    const mouseUpHandler = (() => {
+      this.rippleContainer.nativeElement.removeEventListener('mouseup', mouseUpHandler);
+      console.log('DESTROYING RIPPLE DUE TO EVENT');
+      this.rippleArray.shift();
+    }).bind(this);
+    console.log('DESTROY TRIGGERD');
+    if (this.holdingMouseDown) {
+      this.rippleContainer.nativeElement.addEventListener('mouseup', mouseUpHandler);
+    } else {
+      this.rippleArray.shift();
+    }
   }
 
 }
