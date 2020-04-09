@@ -26,12 +26,12 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
 
   @ViewChild('rippleContainer', { static: false }) rippleContainer: ElementRef;
 
-  @HostListener('mouseup', ['$event'])
+  @HostListener('click', ['$event'])
   handleMouseUp(event: MouseEvent) {
     this.holdingMouseDown = false;
-    if (this.rippleTransitionEnded) {
-      this.rippleArray.pop();
-    }
+    // if (this.rippleTransitionEnded) {
+    //   this.rippleArray.pop();
+    // }
     console.log('CLICKED:', event, this.rippleContainer);
   }
 
@@ -65,37 +65,25 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
 
   createRipple(x: number, y: number, biggestDimension: number, color: string) {
     const dimensions = this.rippleContainer.nativeElement.getBoundingClientRect();
-
     const relativeX = (dimensions.width - x) - (biggestDimension);
     const relativeY = (dimensions.height - y) - (biggestDimension);
     console.log('RELATIVE DIMENSION', relativeX, relativeY);
     this.rippleArray.push({ relativeX, relativeY, biggestDimension, color });
-    // Get biggest dimension in pixels, multiply by 2 to accomodate for click location and use as scale.
-    // newRipple.style.transform = `scale(${this.containerBiggestDimension * 2.3})`;
     this.rippleTransitionEnded = false;
-    // newRipple.style.transform = `scale(1)`;
-    // newRipple.addEventListener('transitionend', e => {
-    //   this.rippleTransitionEnded = true;
-    //   console.log('TRANSITION ENDED:', e, this.holdingMouseDown);
-    //   if (this.holdingMouseDown) {
-    //     // this.rippleContainer.nativeElement.addEventListener('mouseup', mouseUpHandler);
-    //   } else {
-    //     this.destroyRipple(newRipple);
-    //   }
-    // })
   }
 
   destroyRipple() {
     const mouseUpHandler = (() => {
+      this.rippleArray.shift();
       this.rippleContainer.nativeElement.removeEventListener('mouseup', mouseUpHandler);
       console.log('DESTROYING RIPPLE DUE TO EVENT');
-      this.rippleArray.shift();
     }).bind(this);
-    console.log('DESTROY TRIGGERD');
+    console.log('DESTROY TRIGGERD, HOLDING STATUS: ', this.holdingMouseDown);
     if (this.holdingMouseDown) {
       this.rippleContainer.nativeElement.addEventListener('mouseup', mouseUpHandler);
     } else {
       this.rippleArray.shift();
+      console.log('DESTROYING RIPPLE DUE TO FUNCTION');
     }
   }
 
