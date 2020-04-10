@@ -27,7 +27,7 @@ export class RippleComponent implements OnInit, OnDestroy {
     }, 1);
     setTimeout(() => {
       this.killMe.emit();
-    }, 300);
+    }, 400);
   }
 
   ngOnDestroy(): void {
