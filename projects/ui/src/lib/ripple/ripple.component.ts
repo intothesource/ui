@@ -48,8 +48,4 @@ export class RippleComponent implements OnInit, OnDestroy {
   setRippleColor(color: string) {
     this.renderer.setStyle(this.elementRef.nativeElement, 'background', color);
   }
-  // setScale(scale: number) {
-  //   this.renderer.setStyle(this.elementRef.nativeElement, 'transform', `scale(${scale})`);
-  // }
-
 }

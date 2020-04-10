@@ -1,9 +1,6 @@
 import {
   Component, OnInit, AfterViewInit, HostListener, ViewChild, ElementRef, ViewEncapsulation, HostBinding, Input
 } from '@angular/core';
-import { RippleComponent } from '../ripple/ripple.component';
-
-export const maxRipples = 6;
 
 @Component({
   selector: '[its-ripple-animation], its-ripple-animation',
@@ -11,7 +8,7 @@ export const maxRipples = 6;
   styleUrls: ['./ripple-animation.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class RippleAnimationComponent implements OnInit, AfterViewInit {
+export class RippleAnimationComponent {
 
   @Input() color: string;
 
@@ -28,18 +25,19 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
 
   @HostListener('click', ['$event'])
   handleMouseUp(event: MouseEvent) {
-    this.holdingMouseDown = false;
-    // if (this.rippleTransitionEnded) {
-    //   this.rippleArray.pop();
-    // }
-    console.log('CLICKED:', event, this.rippleContainer);
+    if (event.button === 0) {
+      this.holdingMouseDown = false;
+      console.log('MOUSE UP:', event, this.rippleContainer);
+    }
   }
 
   @HostListener('mousedown', ['$event'])
   handleMouseDown(event: MouseEvent) {
-    this.holdingMouseDown = true;
-    this.createRipple(event.offsetX, event.offsetY, this.containerBiggestDimension, 'purple');
-    console.log('HOLDING:', event.offsetX, event.offsetY, this.rippleContainer, this.containerBiggestDimension);
+    if (event.button === 0) {
+      this.holdingMouseDown = true;
+      this.createRipple(event.offsetX, event.offsetY, this.containerBiggestDimension, 'purple');
+      console.log('HOLDING:', event.offsetX, event.offsetY, this.rippleContainer, this.containerBiggestDimension);
+    }
   }
 
   @HostBinding('class')
@@ -55,21 +53,9 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
     return dimensions.height * 2.3;
   }
 
-  ngOnInit() {
-
-  }
-
-  ngAfterViewInit() {
-    console.log('LOADED:', this.rippleContainer);
-  }
-
   createRipple(x: number, y: number, biggestDimension: number, color: string) {
-    const dimensions = this.rippleContainer.nativeElement.getBoundingClientRect();
-    // const relativeX = (-dimensions.width + (x + 70)) - (biggestDimension / 2);
-    // const relativeY = (-dimensions.height + (y + -28)) - (biggestDimension / 2);
     const relativeX = (-biggestDimension / 2) + x;
     const relativeY = (-biggestDimension / 2) + y;
-    console.log('RELATIVE DIMENSION', relativeX, relativeY);
     this.rippleArray.push({ relativeX, relativeY, biggestDimension, color });
     this.rippleTransitionEnded = false;
   }
@@ -77,11 +63,12 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
   destroyRipple() {
     const mouseUpHandler = (() => {
       this.rippleArray.shift();
-      this.rippleContainer.nativeElement.removeEventListener('mouseup', mouseUpHandler);
       console.log('DESTROYING RIPPLE DUE TO EVENT');
+      this.rippleContainer.nativeElement.removeEventListener('mouseup', mouseUpHandler);
     }).bind(this);
     console.log('DESTROY TRIGGERD, HOLDING STATUS: ', this.holdingMouseDown);
     if (this.holdingMouseDown) {
+      console.log('ZOU NU EVENTLISTENER MOETEN TOEVOEGEN');
       this.rippleContainer.nativeElement.addEventListener('mouseup', mouseUpHandler);
     } else {
       this.rippleArray.shift();
