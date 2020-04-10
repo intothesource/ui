@@ -50,9 +50,9 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
   get containerBiggestDimension() {
     const dimensions = this.rippleContainer.nativeElement.getBoundingClientRect();
     if (dimensions.width > dimensions.height) {
-      return dimensions.width;
+      return dimensions.width * 2.3;
     }
-    return dimensions.height;
+    return dimensions.height * 2.3;
   }
 
   ngOnInit() {
@@ -65,8 +65,10 @@ export class RippleAnimationComponent implements OnInit, AfterViewInit {
 
   createRipple(x: number, y: number, biggestDimension: number, color: string) {
     const dimensions = this.rippleContainer.nativeElement.getBoundingClientRect();
-    const relativeX = (dimensions.width - x) - (biggestDimension);
-    const relativeY = (dimensions.height - y) - (biggestDimension);
+    // const relativeX = (-dimensions.width + (x + 70)) - (biggestDimension / 2);
+    // const relativeY = (-dimensions.height + (y + -28)) - (biggestDimension / 2);
+    const relativeX = (-biggestDimension / 2) + x;
+    const relativeY = (-biggestDimension / 2) + y;
     console.log('RELATIVE DIMENSION', relativeX, relativeY);
     this.rippleArray.push({ relativeX, relativeY, biggestDimension, color });
     this.rippleTransitionEnded = false;

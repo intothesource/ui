@@ -22,7 +22,9 @@ export class RippleComponent implements OnInit, OnDestroy {
     this.setRippleSize(this.biggestDimension);
     this.setRippleColor(this.color);
     this.setRippleLocation(this.x, this.y);
-    this.renderer.setStyle(this.elementRef.nativeElement, 'transform', 'scale(1)');
+    setTimeout(() => {
+      this.renderer.setStyle(this.elementRef.nativeElement, 'transform', 'scale(1)');
+    }, 1);
     setTimeout(() => {
       this.killMe.emit();
     }, 300);
@@ -34,8 +36,8 @@ export class RippleComponent implements OnInit, OnDestroy {
 
   setRippleSize(size: number) {
     // Calculate max ripple size and set as width and height
-    this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${size * 2.3}px`);
-    this.renderer.setStyle(this.elementRef.nativeElement, 'height', `${size * 2.3}px`)
+    this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${size}px`);
+    this.renderer.setStyle(this.elementRef.nativeElement, 'height', `${size}px`)
   }
 
   setRippleLocation(x: number, y: number) {
