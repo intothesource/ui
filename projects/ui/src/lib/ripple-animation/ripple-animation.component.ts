@@ -75,6 +75,5 @@ export class RippleAnimationComponent {
       console.log('DESTROYING RIPPLE DUE TO FUNCTION');
     }
   }
-
 }
 
