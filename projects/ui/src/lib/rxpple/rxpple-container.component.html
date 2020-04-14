@@ -1,0 +1,8 @@
+<div class="its-rxpple-container__content">
+  <ng-content></ng-content>
+</div>
+<div class="its-rxpple-container__ripples">
+  <its-rxpple *ngFor="let rxpple of rxpples"
+    [size]="rxpple.size"
+    [@rxpple]="{value: 'foo', params: rxpple }"></its-rxpple>
+</div>
