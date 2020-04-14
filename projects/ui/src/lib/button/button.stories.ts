@@ -118,3 +118,10 @@ storiesOf('Button', module)
       text: text('Text', 'Button Text'),
     }
   }))
+  .add('Button with animated ripple', () => ({
+    template: `
+      <its-button
+        its-ripple-animation
+      >A Small Wave</its-button>
+    `
+  }))
