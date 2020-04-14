@@ -20,10 +20,11 @@ export class RippleAnimationComponent {
   rippleArray = [];
   holdingMouseDown = false;
   rippleTransitionEnded = false;
+  rippleScaleFactor = 2.3;
 
   @ViewChild('rippleContainer', { static: false }) rippleContainer: ElementRef;
 
-  @HostListener('click', ['$event'])
+  @HostListener('mouseup', ['$event'])
   handleMouseUp(event: MouseEvent) {
     if (event.button === 0) {
       this.holdingMouseDown = false;
@@ -35,7 +36,7 @@ export class RippleAnimationComponent {
   handleMouseDown(event: MouseEvent) {
     if (event.button === 0) {
       this.holdingMouseDown = true;
-      this.createRipple(event.offsetX, event.offsetY, this.containerBiggestDimension, 'purple');
+      this.createRipple(event.offsetX, event.offsetY, this.containerBiggestDimension, this.color);
       console.log('HOLDING:', event.offsetX, event.offsetY, this.rippleContainer, this.containerBiggestDimension);
     }
   }
@@ -48,9 +49,9 @@ export class RippleAnimationComponent {
   get containerBiggestDimension() {
     const dimensions = this.rippleContainer.nativeElement.getBoundingClientRect();
     if (dimensions.width > dimensions.height) {
-      return dimensions.width * 2.3;
+      return dimensions.width * this.rippleScaleFactor;
     }
-    return dimensions.height * 2.3;
+    return dimensions.height * this.rippleScaleFactor;
   }
 
   createRipple(x: number, y: number, biggestDimension: number, color: string) {
@@ -69,6 +70,7 @@ export class RippleAnimationComponent {
     console.log('DESTROY TRIGGERD, HOLDING STATUS: ', this.holdingMouseDown);
     if (this.holdingMouseDown) {
       console.log('ZOU NU EVENTLISTENER MOETEN TOEVOEGEN');
+      console.log('CHECK OF CONTAINER BESTAAT: ', this.rippleContainer.nativeElement);
       this.rippleContainer.nativeElement.addEventListener('mouseup', mouseUpHandler);
     } else {
       this.rippleArray.shift();

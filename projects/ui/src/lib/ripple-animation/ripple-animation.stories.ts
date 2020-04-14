@@ -14,12 +14,18 @@ storiesOf('Ripple Animation', module)
     })
   )
   .add('Default container', () => ({
-    template:`
+    template: `
     <div style="display: flex; flex-direction: column;">
-    <p its-ripple-animation>This is a p tag</p>
-    <div style="width: 200px; height: 100px" its-ripple-animation>This is a div<button>This is a button</button></div>
-    <button its-ripple-animation>This is a button</button>
-    <a its-ripple-animation>This is a link tag</a>
-    <its-ripple-animation>Using the component selector</its-ripple-animation>
-    </div>`
+    <p its-ripple-animation [color]="color">This is a p tag</p>
+    <div style="width: 200px; height: 100px" its-ripple-animation [color]="color">This is a div</div>
+    <button its-ripple-animation [color]="color">This is a button</button>
+    <a its-ripple-animation [color]="color">This is a link tag</a>
+    <its-ripple-animation [color]="color">Using the component selector</its-ripple-animation>
+    </div>`,
+    props: {
+      color: text(
+        'Color',
+        '#607D8B'
+      ),
+    }
   }))
