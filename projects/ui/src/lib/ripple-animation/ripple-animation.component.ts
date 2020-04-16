@@ -12,14 +12,11 @@ export class RippleAnimationComponent {
 
   @Input() color: string;
 
-  constructor() {
+  constructor(private elementRef: ElementRef) {
   }
 
-  rippleAmount = 0;
-  rippleAllowed = true;
   rippleArray = [];
   holdingMouseDown = false;
-  rippleTransitionEnded = false;
   rippleScaleFactor = 2.3;
 
   @ViewChild('rippleContainer', { static: false }) rippleContainer: ElementRef;
@@ -28,7 +25,6 @@ export class RippleAnimationComponent {
   handleMouseUp(event: MouseEvent) {
     if (event.button === 0) {
       this.holdingMouseDown = false;
-      console.log('MOUSE UP:', event, this.rippleContainer);
     }
   }
 
@@ -37,7 +33,6 @@ export class RippleAnimationComponent {
     if (event.button === 0) {
       this.holdingMouseDown = true;
       this.createRipple(event.offsetX, event.offsetY, this.containerBiggestDimension, this.color);
-      console.log('HOLDING:', event.offsetX, event.offsetY, this.rippleContainer, this.containerBiggestDimension);
     }
   }
 
@@ -58,23 +53,17 @@ export class RippleAnimationComponent {
     const relativeX = (-biggestDimension / 2) + x;
     const relativeY = (-biggestDimension / 2) + y;
     this.rippleArray.push({ relativeX, relativeY, biggestDimension, color });
-    this.rippleTransitionEnded = false;
   }
 
   destroyRipple() {
     const mouseUpHandler = (() => {
       this.rippleArray.shift();
-      console.log('DESTROYING RIPPLE DUE TO EVENT');
-      this.rippleContainer.nativeElement.removeEventListener('mouseup', mouseUpHandler);
+      this.elementRef.nativeElement.removeEventListener('mouseup', mouseUpHandler);
     }).bind(this);
-    console.log('DESTROY TRIGGERD, HOLDING STATUS: ', this.holdingMouseDown);
     if (this.holdingMouseDown) {
-      console.log('ZOU NU EVENTLISTENER MOETEN TOEVOEGEN');
-      console.log('CHECK OF CONTAINER BESTAAT: ', this.rippleContainer.nativeElement);
-      this.rippleContainer.nativeElement.addEventListener('mouseup', mouseUpHandler);
+      this.elementRef.nativeElement.addEventListener('mouseup', mouseUpHandler);
     } else {
       this.rippleArray.shift();
-      console.log('DESTROYING RIPPLE DUE TO FUNCTION');
     }
   }
 }
