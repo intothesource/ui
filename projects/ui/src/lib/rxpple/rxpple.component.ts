@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 @Component({
   selector: 'its-rxpple',
-  templateUrl: './rxpple.component.html',
+  template: ``,
   styleUrls: ['./rxpple.component.css'],
   encapsulation: ViewEncapsulation.None,
 })

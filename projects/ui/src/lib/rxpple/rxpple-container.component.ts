@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, HostBinding } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
-// import { timer } from 'rxjs';
+import { trigger, style, animate, transition, keyframes, state } from '@angular/animations';
 import classNames from 'classnames';
 
 import { Rxpple } from './rxpple';
@@ -15,21 +14,30 @@ import { Rxpple } from './rxpple';
   encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('rxpple', [
-      transition(':enter', [
+      state('*', style({
+        borderRadius: '50%',
+        opacity: 0.5,
+        transform: 'scale(1)',
+        left: '{{x}}px',
+        top: '{{y}}px',
+      }), { params: { x: 0, y: 0 } }),
+      transition('void => *', [
         style({
-          opacity: '0',
+          transform: 'scale(0)',
+          left: '{{x}}px',
+          top: '{{y}}px',
         }),
-        animate('275ms ease-out', style({
-          opacity: '0.5',
-        })),
+        animate('350ms ease-in-out',
+          style({
+            opacity: 0.5,
+            transform: 'scale(1)'
+          }),
+        ),
       ]),
-      transition(':leave', [
-        style({
-          opacity: '0.5',
-        }),
-        animate('275ms ease-out', style({
-          opacity: '0',
-        })),
+      transition('* => void', [
+        animate('200ms ease-in',
+          style({ opacity: 0.0 }),
+        ),
       ]),
     ]),
   ],

@@ -12,13 +12,33 @@ storiesOf('Rxpple', module)
       imports: [RxppleModule],
     })
   )
-  .add('<* [itsRxpple]/>', () => ({
+  .add('<div [itsRxpple]/>', () => ({
     template: `
-      <div itsRxpple style="width:400px;height:400px;background:hotpink;" class="foo">
+      <div itsRxpple style="width:400px;height:400px;background:hotpink;">
         <its-rxpple-container>
           Ripple this
         </its-rxpple-container>
       </div>
+      <div itsRxpple style="width:100px;height:200px;background:hotpink;">
+        <its-rxpple-container>
+          Ripple this
+        </its-rxpple-container>
+      </div>
+      <div itsRxpple style="width:200px;height:100px;background:hotpink;">
+        <its-rxpple-container>
+          Ripple this
+        </its-rxpple-container>
+      </div>
+    `,
+    props: {}
+  }))
+  .add('<button [itsRxpple]/>', () => ({
+    template: `
+      <button itsRxpple>
+        <its-rxpple-container>
+          Ripple this
+        </its-rxpple-container>
+      </button>
     `,
     props: {}
   }))

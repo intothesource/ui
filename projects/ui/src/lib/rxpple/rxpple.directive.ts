@@ -1,89 +1,65 @@
-import { Directive, HostListener, OnInit, HostBinding, OnDestroy, ContentChild, ElementRef } from '@angular/core';
-import { Subject, merge, timer, race, combineLatest, Subscription } from 'rxjs';
-import { map, tap, mergeMap, takeUntil, take } from 'rxjs/operators';
+import { Directive, HostListener, HostBinding, OnDestroy, ContentChild, ElementRef } from '@angular/core';
+import { Subject, timer, combineLatest } from 'rxjs';
+import { map, mergeMap, take, tap } from 'rxjs/operators';
 
 import { ITSRxppleContainerComponent } from './rxpple-container.component';
-import { Rxpple } from './rxpple';
+import { Point } from './point';
 
-/**
- * 1) mousedown or touchstart will initiate creation of the ripple animation
- * 2) mouseup, touchend, or the end of the animation will initiate destruction of the ripple
- */
 @Directive({
   selector: '[itsRxpple]'
 })
 export class ITSRippleDirective
-  implements OnInit, OnDestroy {
+  implements OnDestroy {
+
+  ANI_SPD = 275;
 
   @ContentChild(ITSRxppleContainerComponent)
   container: ITSRxppleContainerComponent;
 
-  rxppleTriggerStart$ = new Subject<void>();
-  rxppleTriggerEnd$ = new Subject<void>();
-  rxppleTriggerStart$Sub: Subscription;
+  startEv$ = new Subject<Point>();
+  endEv$ = new Subject<void>();
 
+  sub = this.startEv$.pipe(
+    map(({ x, y }) => ({ x, y, s: this.size })),
+    map(({ x, y, s }) => ({ x: ((-s / 2) + x), y: ((-s / 2) + y), size: s })),
+    map(params => this.container.createRxpple(params)),
+    mergeMap(rxpple => combineLatest([this.endEv$, timer(this.ANI_SPD)]).pipe(
+      map(() => this.container.destroyRxpple(rxpple)),
+      take(1)
+    ))
+  ).subscribe();
+
+  /**
+   * @todo use style service to render a stylesheet for this
+   */
   @HostBinding('class.its-rxpple-host')
   itsRxppleHostClassName = true;
 
-  @HostListener('mousedown')
-  onMousedown() {
-    this.rxppleTriggerStart$.next();
-  }
-
-  @HostListener('touchstart')
-  onTouchstart() {
-    this.rxppleTriggerStart$.next();
+  @HostListener('mousedown', ['$event.button', '$event.offsetX', '$event.offsetY'])
+  onMousedown(button: MouseEvent['button'], x: MouseEvent['offsetX'], y: MouseEvent['offsetY']) {
+    if (button !== 0) { return; }
+    this.startEv$.next({ x, y });
   }
 
   @HostListener('mouseup')
   onMouseup() {
-    this.rxppleTriggerEnd$.next();
+    this.endEv$.next();
   }
 
-  @HostListener('touchend')
-  onTouchend() {
-    this.rxppleTriggerEnd$.next();
-  }
+  constructor(private element: ElementRef) { }
 
-  // createRxpple() {
-  //   // Do some calculations based on the container and create a ripple.
-  //   return this.container.createRxpple(10, 10, 275, 275);
-  // }
-
-  // destroyRxpple(rxpple: Rxpple) {
-  //   return this.container.destroyRxpple(rxpple);
-  // }
-
-  constructor(private element: ElementRef) {
-
-  }
-
-  getRect(): ClientRect {
+  get rect(): ClientRect {
     return this.element.nativeElement.getBoundingClientRect()
   }
 
   get size() {
-    const { width, height } = this.getRect();
+    const { width, height } = this.rect;
     const size = width > height ? width : height;
-    return size;
-  }
-
-  ngOnInit() {
-    this.rxppleTriggerStart$Sub = this.rxppleTriggerStart$.pipe(
-      map(() => {
-        return this.container.createRxpple({ size: this.size })
-      }),
-      mergeMap((ripple) => {
-        return combineLatest([this.rxppleTriggerEnd$, timer(275)]).pipe(
-          map(() => this.container.destroyRxpple(ripple)),
-          take(1)
-        );
-      })
-    ).subscribe();
+    return size * 3;
   }
 
   ngOnDestroy(): void {
-    this.rxppleTriggerStart$Sub.unsubscribe();
+    this.sub.unsubscribe();
   }
 
 }
