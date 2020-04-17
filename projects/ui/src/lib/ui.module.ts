@@ -10,6 +10,11 @@ import { RippleModule } from './ripple/ripple.module';
 import { ChipModule } from './chip/chip.module';
 import { InputModule } from './input/input.module';
 import { SnackbarModule } from './snackbar/snackbar.module';
+import { CardModule } from './card/card.module';
+import { ModalModule } from './modal/modal.module';
+import { DatePickerModule } from './date-picker/date-picker.module';
+import { TooltipModule } from './tooltip/tooltip.module';
+import { DragDropModule } from './drag-drop/drag-drop.module';
 
 @NgModule({
   imports: [
@@ -23,6 +28,11 @@ import { SnackbarModule } from './snackbar/snackbar.module';
     ChipModule,
     InputModule,
     SnackbarModule,
+    CardModule,
+    ModalModule,
+    DatePickerModule,
+    TooltipModule,
+    DragDropModule,
   ],
   exports: [
     FormsModule,
@@ -35,6 +45,11 @@ import { SnackbarModule } from './snackbar/snackbar.module';
     ChipModule,
     InputModule,
     SnackbarModule,
+    CardModule,
+    ModalModule,
+    DatePickerModule,
+    TooltipModule,
+    DragDropModule,
   ],
 })
 export class UiModule { }
