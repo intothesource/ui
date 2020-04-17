@@ -4,7 +4,7 @@ import { withA11y } from '@storybook/addon-a11y';
 
 import { RxppleModule } from './rxpple.module';
 
-storiesOf('Rxpple', module)
+storiesOf('components|Rxpple', module)
   .addDecorator(withKnobs)
   .addDecorator(withA11y)
   .addDecorator(

@@ -7,6 +7,9 @@ import { DropdownModule } from './dropdown/dropdown.module';
 import { RippleAnimationModule } from './ripple-animation/ripple-animation.module';
 import { VisuallyHiddenModule } from './visually-hidden/visually-hidden.module';
 import { RippleModule } from './ripple/ripple.module';
+import { ChipModule } from './chip/chip.module';
+import { InputModule } from './input/input.module';
+import { SnackbarModule } from './snackbar/snackbar.module';
 
 @NgModule({
   imports: [
@@ -17,6 +20,9 @@ import { RippleModule } from './ripple/ripple.module';
     RippleAnimationModule,
     RippleModule,
     VisuallyHiddenModule,
+    ChipModule,
+    InputModule,
+    SnackbarModule,
   ],
   exports: [
     FormsModule,
@@ -26,6 +32,9 @@ import { RippleModule } from './ripple/ripple.module';
     RippleAnimationModule,
     RippleModule,
     VisuallyHiddenModule,
+    ChipModule,
+    InputModule,
+    SnackbarModule,
   ],
 })
 export class UiModule { }

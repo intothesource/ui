@@ -5,7 +5,7 @@ import { withA11y } from '@storybook/addon-a11y';
 
 import { ButtonModule } from './button.module';
 
-storiesOf('Button', module)
+storiesOf('components|Button', module)
   .addDecorator(withKnobs)
   .addDecorator(withA11y)
   .addDecorator(
@@ -120,8 +120,6 @@ storiesOf('Button', module)
   }))
   .add('Button with animated ripple', () => ({
     template: `
-      <its-button
-        its-ripple-animation
-      >A Small Wave</its-button>
+      <its-button><span its-ripple-animation>A Small Wave</span></its-button>
     `
   }))

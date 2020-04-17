@@ -5,7 +5,7 @@ import { withA11y } from '@storybook/addon-a11y';
 
 import { RippleAnimationModule } from './ripple-animation.module';
 
-storiesOf('Ripple Animation', module)
+storiesOf('components|Ripple', module)
   .addDecorator(withKnobs)
   .addDecorator(withA11y)
   .addDecorator(
