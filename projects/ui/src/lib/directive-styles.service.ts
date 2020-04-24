@@ -10,11 +10,14 @@ import { Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 })
 export class DirectiveStylesService {
   private readonly renderer: Renderer2;
+  private readonly documentRef: Document;
 
   constructor(
-    @Inject(DOCUMENT) private readonly documentRef: Document,
+    @Inject(DOCUMENT) private readonly _documentRef: any,
     @Inject(RendererFactory2) rendererFactory: RendererFactory2,
   ) {
+    // https://github.com/angular/angular/issues/20351#issuecomment-446025223
+    this.documentRef = this._documentRef;
     // https://github.com/angular/angular/issues/17824#issuecomment-353239017
     this.renderer = rendererFactory.createRenderer(null, null);
   }
