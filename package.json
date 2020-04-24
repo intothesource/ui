@@ -14,7 +14,6 @@
     "build-storybook": "build-storybook -c .storybook -o .storybook-out",
     "deploy:gh-pages": "gh-pages -d .storybook-out"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "~9.0.7",
     "@angular/common": "~9.0.7",
