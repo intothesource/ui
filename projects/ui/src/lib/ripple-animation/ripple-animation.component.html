@@ -1,5 +1,10 @@
 <ng-content></ng-content>
 <div #rippleContainer
   class="ripple-animation__container">
-  <its-ripple *ngFor="let ripple of rippleArray" x="{{ripple.relativeX}}" y="{{ripple.relativeY}}" biggestDimension="{{ripple.biggestDimension}}" color="{{ripple.color}}" (killMe)="destroyRipple()"></its-ripple>
+  <its-ripple *ngFor="let ripple of rippleArray"
+    x="{{ripple.relativeX}}"
+    y="{{ripple.relativeY}}"
+    biggestDimension="{{ripple.biggestDimension}}"
+    color="{{ripple.color}}"
+    (killMe)="destroyRipple()"></its-ripple>
 </div>

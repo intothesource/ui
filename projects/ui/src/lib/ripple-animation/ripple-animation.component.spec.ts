@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RippleAnimationComponent } from './ripple-animation.component';
+import { RippleModule } from '../ripple/ripple.module';
 
 describe('RippleAnimationComponent', () => {
   let component: RippleAnimationComponent;
@@ -8,9 +9,9 @@ describe('RippleAnimationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RippleAnimationComponent ]
-    })
-    .compileComponents();
+      declarations: [RippleAnimationComponent],
+      imports: [RippleModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
