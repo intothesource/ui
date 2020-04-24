@@ -24,6 +24,8 @@ jobs:
       #     restore-keys: |
       #       ${{ runner.os }}-node-
 
+      - run: sudo apt-get update && sudo apt-get install --only-upgrade google-chrome-stable
+
       - run: npm i
 
       - name: Lint
