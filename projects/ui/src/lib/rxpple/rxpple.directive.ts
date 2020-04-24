@@ -8,7 +8,7 @@ import { Point } from './point';
 @Directive({
   selector: '[itsRxpple]'
 })
-export class ITSRippleDirective
+export class ITSRxppleDirective
   implements OnDestroy {
 
   ANI_SPD = 275;

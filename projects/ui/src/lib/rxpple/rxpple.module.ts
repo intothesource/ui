@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ITSRippleDirective } from './rxpple.directive';
+import { ITSRxppleDirective } from './rxpple.directive';
 import { ITSRxppleContainerComponent } from './rxpple-container.component';
 import { ITSRxppleComponent } from './rxpple.component';
 import { CommonModule } from '@angular/common';
@@ -12,13 +12,13 @@ import { CommonModule } from '@angular/common';
     BrowserAnimationsModule,
   ],
   declarations: [
-    ITSRippleDirective,
+    ITSRxppleDirective,
     ITSRxppleContainerComponent,
     ITSRxppleComponent,
   ],
   exports: [
     CommonModule,
-    ITSRippleDirective,
+    ITSRxppleDirective,
     ITSRxppleContainerComponent,
     ITSRxppleComponent,
   ]
