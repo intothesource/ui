@@ -12,7 +12,8 @@
     "e2e:watch-no-serve": "wait-on http-get://localhost:4200 && watch \"npm run e2e -- --devServerTarget=\" projects/ui-example/e2e --wait=1",
     "storybook": "start-storybook -p 6006 --ci",
     "build-storybook": "build-storybook -c .storybook -o .storybook-out",
-    "deploy:gh-pages": "gh-pages -d .storybook-out"
+    "deploy:gh-pages": "gh-pages -d .storybook-out",
+    "postinstall": "cd ./node_modules/protractor && npm i webdriver-manager@latest ; cd -"
   },
   "dependencies": {
     "@angular/animations": "~9.1.3",
