@@ -19,10 +19,10 @@
       "dom"
     ],
     "paths": {
-      "ui": [
+      "@intothesource/ui": [
         "dist/ui"
       ],
-      "ui/*": [
+      "@intothesource/ui/*": [
         "dist/ui/*"
       ]
     }
